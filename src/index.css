@@ -1,0 +1,95 @@
+/* ----- REUSABLE CODE ----- */
+
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background: rgb(244, 244, 244);
+  color: #333;
+}
+
+section {
+  background-color: #fafafa;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  font-size: 16px;
+}
+
+a {
+  color: #f54d5a;
+}
+
+.hide {
+  display: none;
+}
+
+div[aria-label="Vertical tabs"]{
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.MuiGrid-root.MuiGrid-container {
+    min-width: 100%;
+}
+
+.MuiTypography-root[role="tabpanel"] {
+    width: 100%;
+ }
+
+ /*.MuiDialogContent-root{
+   overflow-y:hidden !important
+ }*/
+
+.ag-header-cell-label {
+  justify-content: center;
+}
+
+.ag-react-container{
+  text-align: center;
+}
+
