@@ -12,37 +12,15 @@ import "typeface-roboto/index.css";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import "./index.css";
-//import App from "./App";
-//import authReducer from "./store/reducers/authReducer";
-//import operationReducer from "./store/reducers/operationReducer";
-//import facilityReducer from "./store/reducers/facilityReducer";
-//import portfolioReducer from "./store/reducers/portfolioReducer";
-//import resultReducer from "./store/reducers/resultReducer";
-//import parameterOverrideReducer from "./store/reducers/parameterOverrideReducer";
-//import importPanelReducer from "./store/reducers/importPanelReducer";
+import App from "./app";
+import reducer from "../src/store/reducers/reducer";
 //import theme from "./utility/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
-
-// only for testing - see correctness of base url
-/*axiosassetdisposal.interceptors.request.use(
-  (req) => {
-    return req;
-  },
-  (err) => {
-    return Promise.reject(err);
-  }
-);*/
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducers = combineReducers({
-  //auth: authReducer,
-  //facility: facilityReducer,
-  //portfolio: portfolioReducer,
-  //result: resultReducer,
-  //operation: operationReducer,
-  //parameterOverride : parameterOverrideReducer,
-  //importPanel: importPanelReducer
+  reducer: reducer
 });
 
 const store = createStore(
@@ -54,7 +32,7 @@ const app = (
   <Provider store={store}>
     <BrowserRouter basename="/assetdisposal">
       {/*<ThemeProvider theme={theme}>*/}
-        {/*<App />*/}
+        {<App />}
       {/*</ThemeProvider>*/}
     </BrowserRouter>
   </Provider>
