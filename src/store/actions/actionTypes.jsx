@@ -1,1 +1,3 @@
-export const UPDATE_TEXT_VALUE = "UPDATE_TEXT_VALUE";
+export const UPDATE_DOC_INFO = "UPDATE_DOC_INFO";
+export const LOADING_START = "LOADING_START";
+export const LOADING_END = "LOADING_END";

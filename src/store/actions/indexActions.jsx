@@ -1,1 +1,1 @@
-export {updateTextValue} from "./actions"; 
+export {updateDocInfo, downloadAgGridExcel} from "./actions";
