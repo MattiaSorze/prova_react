@@ -20,7 +20,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducers = combineReducers({
-  reducer: reducer
+  reducer: reducer,
 });
 
 const store = createStore(
@@ -32,11 +32,12 @@ const app = (
   <Provider store={store}>
     <BrowserRouter basename="/assetdisposal">
       {/*<ThemeProvider theme={theme}>*/}
-        {<App />}
+      {<App />}
       {/*</ThemeProvider>*/}
     </BrowserRouter>
   </Provider>
 );
+///
 
 var t = document.getElementById("root");
 
