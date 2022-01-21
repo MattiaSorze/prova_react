@@ -1,3 +1,4 @@
 export const UPDATE_DOC_INFO = "UPDATE_DOC_INFO";
 export const LOADING_START = "LOADING_START";
 export const LOADING_END = "LOADING_END";
+export const LOAD_DB_DATA_SUCCESS = "LOAD_DB_DATA_SUCCESS";

@@ -3,7 +3,8 @@ import {updateObject} from "../../utility/utility";
 
 const initialState = {
     docInfo: null,
-    loading: false
+    loading: false,
+    dbData: null
 };
 
 const updateDocInfo = (state, action) => {
@@ -24,6 +25,12 @@ const loadingEnd = (state, action) => {
     });
 };
 
+const loadDbDataSuccess = (state, action) => {
+    return updateObject(state, {
+        dbData: "prova"
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case actionTypes.UPDATE_DOC_INFO:
@@ -32,6 +39,8 @@ const reducer = (state = initialState, action) => {
             return loadingStart(state, action);
         case actionTypes.LOADING_END:
             return loadingEnd(state, action);
+        case actionTypes.LOAD_DB_DATA_SUCCESS:
+            return loadDbDataSuccess(state, action);
     }
     return true;
 };

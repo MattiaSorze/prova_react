@@ -21,6 +21,24 @@ export const loadingEnd = () => {
     };
 };
 
+export const loadDbDataSuccess = () => {
+  return{
+    type: actionTypes.LOAD_DB_DATA_SUCCESS
+  };
+};
+
+export const loadDbData = () => {
+  /*return dispatch => {
+    dispatch(loadingStart())
+      .then( response => {
+        dispatch(loadDbDataSuccess());
+        dispatch(loadingEnd());
+      }
+    ).
+    catch(err => {});
+  };*/
+};
+
 export const downloadAgGridExcel = (fileName, filterData) => { //filterData: lista di facility provenienti dalla ag grid (lista di AnalysisResultsTO)
     let headerObjects = [{key: "title", value: "TITLE"}, {key: "author", value: "AUTHOR"}];
   
