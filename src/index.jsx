@@ -15,6 +15,7 @@ import App from "./app";
 import reducer from "../src/store/reducers/reducer";
 import theme from "./utility/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -27,10 +28,16 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
 const app = (
   <Provider store={store}>
     <BrowserRouter basename="/pdfcreator">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
         <App />
       </ThemeProvider>
     </BrowserRouter>

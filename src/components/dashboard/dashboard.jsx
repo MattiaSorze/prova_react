@@ -10,6 +10,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
 import PropTypes from "prop-types";
+import AgGrid from "../../utility/agGrid";
+import { Autocomplete } from "@mui/material";
+import {TextField} from "@mui/material";
 
 function Copyright() {
   return (
@@ -148,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [autoCompValue, setAutoCompValue] = React.useState();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -164,15 +168,68 @@ export default function Dashboard() {
     }
   ];
 
+  let style = {
+    textAlign: "center"
+  };
+  let columns = [
+    {
+      headerName: "ID",
+      field: "id",
+      hide: false,
+      sortable: false,
+      filter: false,
+      cellStyle: style
+    },
+    {
+      headerName: "Nome",
+      field: "name",
+      hide: false,
+      sortable: false,
+      filter: false,
+      cellStyle: style
+    },
+    {
+      headerName: "Age",
+      field: "age",
+      hide: false,
+      sortable: false,
+      filter: false,
+      cellStyle: style
+    }
+  ];
+
+  const agGridData = [
+    { id: 1, name: "John Doe", age: 25 },
+    { id: 2, name: "Jane Smith", age: 30 },
+    // Altri dati...
+  ];
+
+  const clickHandler = (row) => {
+    return null;
+  }
+
   const dbData = useSelector(state => state.reducer.dbData);
   console.log(dbData);
+
+
+
+    const currencyList = [
+      { title: "EUR"},
+      { title: "USD" },
+      { title: "JPY" }
+    ];
+  
+    const defaultProps = {
+      options: currencyList,
+      getOptionLabel: (option) => option.title,
+    };
 
   return (
     <div className={classes.root}>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
           <Grid item xs={12} className={classes.space}></Grid>
-          <AppBar position="static" color="default">
+          <AppBar position="static" color="transparent">
             <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="secondary" variant="scrollable"
               scrollButtons="auto" aria-label="scrollable auto tabs example" className={classes.tabSpace}
             >
@@ -185,10 +242,26 @@ export default function Dashboard() {
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>  
-            {/*inserisci componente 1° pannello*/}
+            {<AgGrid
+                  columns={columns}
+                  data={agGridData}
+                  sortable={true}
+                  clickHandler={clickHandler}
+                  fit={true}
+                  heightSize={100}/>}
           </TabPanel>
           <TabPanel value={value} index={1}>  
-            {/*inserisci componente 2° pannello*/}
+            {<Autocomplete
+                        {...defaultProps}
+                        id="controlled-demo"
+                        value={autoCompValue}
+                        onChange={(event, newValue) => {
+                          setAutoCompValue(newValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField {...params} label="controlled" variant="standard" />
+                        )}
+                      />}
           </TabPanel>
           <Box pt={2}>
             <Copyright />
