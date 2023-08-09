@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import * as dataType from "../constants/dataType";
 
 export const updateObject = (oldObject, updatedProperties) => {
     return {
@@ -7,9 +8,8 @@ export const updateObject = (oldObject, updatedProperties) => {
     };
 };
 
-export const checkLoading = () => {
-    let loading = useSelector(state => state.reducer.loading);
-    return loading;
+export const checkLoading = (addHikingLoading, complHikingsLoading) => {
+    return (addHikingLoading || complHikingsLoading);
 };
 
 export const formatNumber = (value, minimumFractionDigits, maximumFractionDigits, thousandSeparator) => {
@@ -30,6 +30,30 @@ export const formatDate = (date) =>{
   return  date.getDate()
           + "/" + (date.getMonth() + 1)
           + "/" + date.getFullYear();
+};
+
+export const formatter = (type, decimal) => { //funzione che formatta i valori delle colonne delle varie AgGrid
+  let precision = decimal ? decimal : 17;
+  return params => {
+    let value = params.value;
+    if (value) {
+      switch (type){
+        case dataType.PERCENTAGE:  value = formatNumber(value, 0, 4, true);
+                                   value = value + "%";
+                                   break;
+        case dataType.PERCENTAGE_100:  value = formatNumber(value * 100, 0, 4, true);
+                                   value = value + "%";
+                                   break;
+        case dataType.DOUBLE:
+        case dataType.INTEGER: value = formatNumber(value, 0, precision, true);
+                               break;
+        case dataType.DATE: value = formatDate(new Date(value))
+                            break;
+        default: break;
+      }
+    }
+    return value;
+  };
 };
 
 export const fitToColumn = (header, rows) => {

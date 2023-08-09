@@ -1,0 +1,77 @@
+.button-style {
+    background-color:rgb(102, 168, 3) !important;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    min-width: 100px;
+}
+.button-style:hover {
+    background-color:green !important
+}
+.upload-button-style {
+    color:white;
+    width: 40%;
+    background-color:rgb(102, 168, 3) !important;
+    --transition-duration: 0.5s !important;
+    --transition-property: width !important;
+    min-width: 150px;
+}
+.upload-button-style:hover {
+    color:white;
+    background-color: green !important;
+    --width: 97%;
+}
+.input-style {
+    display: none;
+}
+#light .typography-style-add{
+    text-align: center;
+    padding:10px;
+    color: darkgreen !important;
+}
+#dark .typography-style-add{
+    text-align: center;
+    padding:10px;
+    color: white !important;
+}
+.toast-message{
+    background: rgba(0, 0, 239, 0.751);
+    color: white !important;
+}
+.toast-message-error{
+    background: rgb(66, 66, 66) !important;
+    color: white !important;
+}
+.toast-progress-bar{
+    background-color: #04B504 !important;
+}
+.toast-error-progress-bar{
+    background-color: #F94646 !important;
+}
+.toast-success-icon{
+    color: #04B504;
+}
+.toast-error-icon{
+    color: red;
+}
+#light .paper-style-add{
+    background-color: white;
+}
+#dark .paper-style-add{
+    background-color: rgb(36, 36, 36);
+    border: 1px solid;
+    border-color: white;
+    border-radius: 15px;
+}
+#light .field-style-add{
+    color: rgb(36, 36, 36);
+    padding-left: 5px;
+}
+#dark .field-style-add{
+    color: white;
+    padding-left: 5px;
+}
+#light .copy-right-add{
+    color: rgb(36, 36, 36);
+}
+#dark .copy-right-add{
+    color: white;
+}

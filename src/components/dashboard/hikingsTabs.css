@@ -1,0 +1,51 @@
+.tab-style {
+    color:#827D7D !important;
+    --background-color: black;
+    font-weight: bold !important;
+}
+.tab-style:hover{
+    --color:green
+}
+.tab-indicator-style {
+    background-color:  rgb(102, 168, 3) !important;
+    height: 3px;
+}
+.selected-tab-style {
+    color: black !important;
+    font-weight: bold !important;
+}
+.app-bar-tabs{
+    --height: 80px;
+    border-radius: 10px;
+    align-items:center;
+}
+.toast-message{
+    background: rgba(0, 0, 239, 0.751);
+    color: white !important;
+}
+.toast-message-error{
+    background: rgb(66, 66, 66) !important;
+    color: white !important;
+}
+.toast-progress-bar{
+    background-color: #04B504 !important;
+}
+.toast-error-progress-bar{
+    background-color: #F94646 !important;
+}
+.toast-success-icon{
+    color: #04B504;
+}
+.toast-error-icon{
+    color: #F94646;
+}
+.delete-icon{
+    color:  rgb(102, 168, 3);
+    transition-duration: 1s !important;
+    transition-property: transform !important;
+}
+.delete-icon:hover{
+    color: #F94646;
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+}

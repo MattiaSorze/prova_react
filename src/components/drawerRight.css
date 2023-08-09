@@ -1,0 +1,39 @@
+#light .app-bar-title-typography {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding-left: 50px;
+}
+#dark .app-bar-title-typography {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(36, 36, 36);
+    padding-left: 50px;
+}
+#light .app-bar-style{
+    background-color: #52CA04;
+}
+#dark .app-bar-style{
+    background-color: rgb(36, 36, 36);
+    border-bottom: 1px solid;
+    border-bottom-color: gray;
+}
+#light .divider-style{
+    background-color: lightgrey;
+}
+#dark .divider-style{
+    background-color: gray;
+}
+#light .drawer-right-icon{
+    color: gray;
+}
+#dark .drawer-right-icon{
+    color: white !important;
+}
+#light .menu-item-icon{
+    color: gray;
+}
+#dark .menu-item-icon{
+    color: white;
+}

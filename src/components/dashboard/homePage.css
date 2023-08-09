@@ -1,0 +1,68 @@
+.img {
+    width: 1000px;
+    height: 600px;
+}
+#light .homepage-typography {
+    text-align: center;
+    color: green !important;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#dark .homepage-typography {
+    text-align: center;
+    color: white !important;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#light .homepage-card {
+    max-width: 1150px;
+    max-height: 800px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    border-radius: 10px;
+}
+#dark .homepage-card {
+    max-width: 1150px;
+    max-height: 800px;
+    text-align: center;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    background-color: rgb(36, 36, 36);
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: gray;
+    border-style: groove;
+}
+.arrow-icon:hover {
+    color: red !important;
+}
+#light .copy-right-home{
+    color: rgb(36, 36, 36);
+}
+#dark .copy-right-home{
+    color: white;
+}
+#light .show-right-image{
+    color: rgb(36, 36, 36);
+}
+#light .show-right-image:hover{
+    color: rgb(41, 9, 250);
+}
+#dark .show-right-image{
+    color: white;
+}
+#dark .show-right-image:hover{
+    color: rgb(251, 29, 29);
+}
+#light .show-left-image{
+    color: rgb(36, 36, 36);
+}
+#light .show-left-image:hover{
+    color: rgb(41, 9, 250);
+}
+#dark .show-left-image{
+    color: white;
+}
+#dark .show-left-image:hover{
+    color: rgb(251, 29, 29);
+}

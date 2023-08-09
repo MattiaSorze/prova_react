@@ -1,0 +1,14 @@
+.menu-option-style{
+    min-width: 120px;
+    min-height: 35px;
+    margin-top: 2px;
+    margin-bottom: 1px;
+}
+.menu-option-style:hover{
+    cursor: pointer;
+    background-color: #5de900;
+}
+.menu-option-typography{
+    text-align: center;
+    padding-top: 3px;
+}
