@@ -37,11 +37,11 @@
 }
 #light .title-typography {
     color: black !important;
-    background-color: #52CA04 !important;
+    background-color: white !important;
 }
 #dark .title-typography {
     color: white !important;
-    background-color: #52CA04 !important;
+    background-color: rgb(36, 36, 36) !important;
 }
 .hiking-card-popover{
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px !important;

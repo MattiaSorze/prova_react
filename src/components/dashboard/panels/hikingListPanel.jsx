@@ -184,7 +184,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
     return (
         <div className={classes.root}>
           <Grid item xs={12} className={classes.space}>
-            <Typography level="h2" className="title-typography" variant="soft">Hikings List</Typography>
+            <Typography level="h2" className="title-typography" variant="solid">Hikings List</Typography>
           </Grid>
           <Grid container style={{paddingTop: "10px"}}>
             <Grid item xs={1}></Grid>
@@ -205,22 +205,29 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                   dispatch(updateFilteredHikingData(hikingsList));
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Region" variant="standard" />
+                  <TextField {...params} label="Region" variant="outlined" />
                 )}
-                style={{height: "56px", width: "240px"}}
+                sx={{height: "50px", width: "240px"}}
               />
             </Grid>
             <Grid item xs={1}/>
-            <Grid item xs={3} style={{paddingTop: "22px"}}>
+            <Grid item xs={3} /*style={{paddingTop: "22px"}}*/>
+              <FormLabel className="field-style-add">Value</FormLabel>
               <TextField
-                label="search"
+                //label="search"
                 value={searchValue}
+                variant="outlined"
                 onChange={(e) => searchHikingElement(e)}
-                style={{backgroundColor: "white", borderRadius: "10px"}}
+                style={{backgroundColor: "white", borderRadius: "5px"}}
                 InputLabelProps={{
                   style: {color: "blue"}
                 }}
                 disabled={searchField ? false : true}
+                sx={{height: "48px", 
+                  "& .MuiOutlinedInput-root": {
+                    height: "48px"
+                  }
+                }}
               ></TextField>
             </Grid>
             <Grid item xs={1}/>
@@ -229,9 +236,10 @@ export default function HikingListPanel({columns, createDeleteButton}) {
             </Grid>
           </Grid>
           
-          <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", minWidth: "1100px", maxWidth: "1200px", flexWrap: "wrap"}}>
+          <div style={{/*display: "flex", flexDirection: "row", justifyContent: "space-around",*/ minWidth: "1100px", maxWidth: "1200px", flexWrap: "wrap"}}>
+            <Grid container spacing={4}>
             {filteredHikingData.map((elem, index) =>
-              (<Card className="hiking-card" variant="outlined">
+              (<Grid item xs={4}><Card className="hiking-card" variant="outlined">
                     <CardHeader
                       action={
                         <IconButton aria-label="settings" onClick={(e) => handleClick(e, elem)}>
@@ -284,27 +292,10 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                     </div>
                   </CardContent>
                   <CardActions>
-                    {/*<ExpandMore
-                      expand={expanded[index]}
-                      onClick={() => handleExpandClick(index)}
-                      aria-expanded={expanded[index]}
-                      aria-label="show more"
-                    >
-                      <ExpandMoreIcon />
-            </ExpandMore>*/}
                   </CardActions>
-                  {/*<Collapse in={expanded[index]} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-        </CardContent>
-          </Collapse>*/}
                   </CardActionArea>
-              </Card>)
-            )}
+              </Card></Grid>)
+            )}</Grid>
           </div>
     </div>
     );

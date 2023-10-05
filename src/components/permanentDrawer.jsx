@@ -210,23 +210,23 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     >
         {open ? <Divider className="divider-style"/> : null}
         <List>
-          <ListItem button component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}}}>
-            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray"}}>
+          <ListItem button component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
             <FontAwesomeIcon icon={faHouse} size="lg" />
             </ListItemIcon>
             <ListItemText primary="Home"/>
           </ListItem>
           <Tooltip title="Hikings List" placement="right">
-            <ListItem button component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}}}>
-              <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray"}}>
+            <ListItem button component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+              <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
                 <FontAwesomeIcon icon={faPersonHiking} size="lg" />
               </ListItemIcon>
               <ListItemText primary="Hikings"/>
             </ListItem>
         </Tooltip>
         <Tooltip title="Add Hiking" placement="right">
-          <ListItem button component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}}}>
-            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray"}}>
+          <ListItem button component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
               <FontAwesomeIcon icon={faCirclePlus} size="lg"/>
             </ListItemIcon>
             <ListItemText primary="Add"/>
@@ -238,55 +238,56 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
   return (
     <div className="App" id={themeParent}>
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open} className="app-bar-style">
-      <Toolbar style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingLeft: "8px"}}>
-      <IconButton
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              sx={{/* ...(state[anchor] && { display: 'none' }),*/ "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#09bd09"}}}
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open} className="app-bar-style">
+          <Toolbar style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingLeft: "8px"}}>
+            <IconButton
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerOpen}
+                sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#09bd09"}, marginLeft: "4px"}}
             >
               {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
             </IconButton> 
-          <Typography variant="h5" noWrap className="app-bar-title-typography" component={Link} to="/">
-            Hiking App
-          </Typography>
-          {/*<Toggle onChange={changeToggleTheme} checked={themeParent === "dark"} style={{color: "blue"}}/>*/}
-          <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
-            label={themeParent === "dark" ? "Dark" : "Light"}
-          /> 
-        </Toolbar>
-      </AppBar>
-      <Drawer 
-        variant="permanent"
-        open={open}
-        PaperProps={{
-            sx: {
-              backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
-              color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)",
-              borderRight: "1px solid",
-              borderColor: themeParent === "dark" ? "gray" : "#E1DFDF"
-            }
-          }}
-        >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "lightgray"}}} >
-            <ChevronLeftIcon sx={{color: themeParent === "dark" ? "lightgray" : "gray"}}/>
-          </IconButton>
-        </DrawerHeader>
-        {list()}
-        <Divider className="divider-style" />
-      </Drawer>
-      <Main open={open} style={{minHeight: "1000px"}}>
-        <Container maxWidth={false} >
-          <Navigation />
-        </Container>
-      </Main>
-      <ToastContainer/>
-    </Box>
+                <Typography variant="h5" noWrap className="app-bar-title-typography" component={Link} to="/">
+                  Hiking App
+                </Typography>
+                {/*<Toggle onChange={changeToggleTheme} checked={themeParent === "dark"} style={{color: "blue"}}/>*/}
+                <FormControlLabel
+                  control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
+                  label={themeParent === "dark" ? "Dark" : "Light"}
+            /> 
+          </Toolbar>
+        </AppBar>
+        <Drawer 
+          variant="permanent"
+          open={open}
+          PaperProps={{
+              sx: {
+                backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
+                color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)",
+                borderRight: "1px solid",
+                borderColor: themeParent === "dark" ? "#5B5B5B" : "#E1DFDF",
+                boxShadow: themeParent === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)"
+              }
+            }}
+          >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "lightgray"}}} >
+              <ChevronLeftIcon sx={{color: themeParent === "dark" ? "lightgray" : "gray"}}/>
+            </IconButton>
+          </DrawerHeader>
+          {list()}
+          <Divider className="divider-style" />
+        </Drawer>
+        <Main open={open} style={{minHeight: "1000px"}}>
+          <Container maxWidth={false} >
+            <Navigation />
+          </Container>
+        </Main>
+        <ToastContainer/>
+      </Box>
     </div>
   );
 }

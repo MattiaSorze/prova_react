@@ -58,7 +58,7 @@
 #dark .paper-style-add{
     background-color: rgb(36, 36, 36);
     border: 1px solid;
-    border-color: white;
+    border-color: #5B5B5B;
     border-radius: 15px;
 }
 #light .field-style-add{

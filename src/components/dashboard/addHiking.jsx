@@ -343,7 +343,7 @@ export default function AddHiking() {
                                   renderInput={(params) => (
                                     <TextField {...params} label="Status" variant="standard" />
                                   )}
-                                  sx={{
+                                  /*sx={{
                                       '.MuiAutocomplete-popupIndicator:hover': {
                                         backgroundColor: "#04B504"
                                       },
@@ -353,7 +353,7 @@ export default function AddHiking() {
                                       '.MuiAutocomplete-clearIndicator': {          
                                         backgroundColor: "#04B504"
                                       }
-                                  }}
+                                  }}*/
                                 />
                               </FormControl>
                             </Grid>

@@ -17,13 +17,13 @@
 #dark .app-bar-style{
     background-color: rgb(36, 36, 36);
     border-bottom: 1px solid;
-    border-bottom-color: gray;
+    border-bottom-color: #5B5B5B;
 }
 #light .divider-style{
     background-color: lightgrey;
 }
 #dark .divider-style{
-    background-color: gray;
+    background-color: #5B5B5B;
 }
 #light .drawer-right-icon{
     color: gray;
