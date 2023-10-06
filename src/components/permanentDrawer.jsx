@@ -210,14 +210,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     >
         {open ? <Divider className="divider-style"/> : null}
         <List>
-          <ListItem button component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+          <ListItem button component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
             <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
             <FontAwesomeIcon icon={faHouse} size="lg" />
             </ListItemIcon>
             <ListItemText primary="Home"/>
           </ListItem>
           <Tooltip title="Hikings List" placement="right">
-            <ListItem button component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+            <ListItem button component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
               <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
                 <FontAwesomeIcon icon={faPersonHiking} size="lg" />
               </ListItemIcon>
@@ -225,7 +225,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
             </ListItem>
         </Tooltip>
         <Tooltip title="Add Hiking" placement="right">
-          <ListItem button component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB", borderRadius: "8px"}}}>
+          <ListItem button component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
             <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
               <FontAwesomeIcon icon={faCirclePlus} size="lg"/>
             </ListItemIcon>

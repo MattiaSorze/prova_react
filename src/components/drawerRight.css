@@ -2,14 +2,14 @@
     text-align: center;
     text-decoration: none;
     color: white;
-    padding-left: 50px;
+    margin-left: 150px;
 }
 #dark .app-bar-title-typography {
     text-align: center;
     text-decoration: none;
     color: white;
     background-color: rgb(36, 36, 36);
-    padding-left: 50px;
+    margin-left: 150px;
 }
 #light .app-bar-style{
     background-color: #52CA04;
