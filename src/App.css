@@ -1,9 +1,10 @@
 .App {
   font-family: "Ubuntu", sans-serif;
-  display: flex;
-  justify-content: center;
+  /*display:*/ /*flex; tolti perchè allo zoom della pagina, gli elementi ai lati venivano occultati*/
+  /*justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column;*/
+  min-width: 1500px;
 }
 
 #light {

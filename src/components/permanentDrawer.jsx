@@ -238,7 +238,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
   return (
     <div className="App" id={themeParent}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex', minWidth: "1500px" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open} className="app-bar-style">
           <Toolbar style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingLeft: "8px"}}>

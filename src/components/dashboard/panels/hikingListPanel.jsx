@@ -237,7 +237,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
           </Grid>
           
           <div style={{/*display: "flex", flexDirection: "row", justifyContent: "space-around",*/ minWidth: "1100px", maxWidth: "1200px", flexWrap: "wrap"}}>
-            <Grid container spacing={4}>
+            <Grid container spacing={8}>
             {filteredHikingData.map((elem, index) =>
               (<Grid item xs={4}><Card className="hiking-card" variant="outlined">
                     <CardHeader
