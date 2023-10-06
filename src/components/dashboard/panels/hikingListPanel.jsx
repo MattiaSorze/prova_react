@@ -6,6 +6,7 @@ import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingD
 import { useDispatch, useSelector } from "react-redux";
 import HikingDetailsPanel from "./hikingDetailsPanel";
 import { Card, CardContent, CardMedia, Paper, CardActionArea, CardActions, CardHeader, TextField } from "@mui/material";
+import Tooltip, {tooltipClasses } from "@mui/material/Tooltip";
 import { Grid } from "@material-ui/core";
 import { Button, Typography } from "@mui/joy";
 import { makeStyles } from "@material-ui/core/styles";
@@ -181,6 +182,25 @@ export default function HikingListPanel({columns, createDeleteButton}) {
       dispatch(changeSearchValue(""));
     }
 
+    const BootstrapTooltip = styled(({ className, ...props }) => (
+      <Tooltip {...props} arrow classes={{ popper: className }} />
+      ))(({ theme }) => ({
+        [`& .${tooltipClasses.arrow}`]: {
+          color: theme.palette.common.black,
+        },
+        [`& .${tooltipClasses.tooltip}`]: {
+          backgroundColor: theme.palette.common.black,
+          fontSize: 14,
+          fontFamiliy: "Arial",
+          fontWeight: "bold",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          paddingLeft: "8px",
+          paddingRight: "8px",
+          borderRadius: "10px"
+        },
+    }));
+
     return (
         <div className={classes.root}>
           <Grid item xs={12} className={classes.space}>
@@ -246,7 +266,13 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                           <MoreVertIcon />
                         </IconButton>
                       }
-                      title={<Typography level="h5" className="hiking-card-title-typography">{elem.name}</Typography>}
+                      title={
+                        <BootstrapTooltip title={elem.name} placement="top">
+                          <Typography level="h5" className="hiking-card-title-typography">
+                            {elem.name.length <= 20 ? elem.name : (elem.name.substr(0, 20) + "...")}
+                          </Typography>
+                        </BootstrapTooltip>
+                      }
                       subheader={
                         <Typography level="h6" className="hiking-card-title-typography">
                           {formatDate(new Date(elem.hikingDate))}
