@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import { Autocomplete } from "@mui/material";
 import {TextField} from "@mui/material";
 import JoyAutocomplete from "@mui/joy/Autocomplete";
-import { clearHikingInfo, fileParsingFailed, fileParsingFinished, updateHikingInfo, waitFileParsing } from "../../features/addHiking/addHikingSlice";
+import { clearHikingInfo, fileParsingFailed, fileParsingFinished, imageUploadFailed, imageUploadFinished, updateHikingInfo, waitFileParsing } from "../../features/addHiking/addHikingSlice";
 import AutocompleteOption from '@mui/joy/AutocompleteOption';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import ListItemContent from '@mui/joy/ListItemContent';
@@ -175,6 +175,7 @@ export default function AddHiking() {
     const settings = useSelector(state => state.addHiking.settings);
     const dispatch = useDispatch();
     const [fileData, setFileData] = useState(null);
+    const [imageData, setImageData] = useState(null);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -222,6 +223,35 @@ export default function AddHiking() {
       catch(error){
         console.log(error);
         dispatch(fileParsingFailed());
+      }
+    }
+
+    const convertImageToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          resolve(reader.result.split(',')[1]);  // Restituisci solo il Base64, escludendo il prefisso 'data:image/jpeg;base64,'
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+      });
+    };
+
+    const handleImageUpload = async (event) => {
+      const file = event.target.files[0];
+
+      if (file) {
+        try {
+          const base64Image = await convertImageToBase64(file);
+          // Invia l'immagine in Base64 al server
+          dispatch(imageUploadFinished());
+          setImageData(base64Image);
+          dispatch(updateHikingInfo({value: base64Image, propertyName: "imageData"}));
+          //sendBase64ImageToServer(base64Image);
+        } catch (error) {
+          console.log(error);
+          dispatch(imageUploadFailed());
+        }
       }
     }
 
@@ -367,7 +397,7 @@ export default function AddHiking() {
                             </Grid>
                             <Grid item xs={1} className={classes.uploadButton}>
                               <UploadButton
-                                onFileChange={handleFileChange}
+                                onFileChange={handleImageUpload}
                                 fileName={fileData && fileData.fileName}
                                 label="UPLOAD IMAGES"
                               />

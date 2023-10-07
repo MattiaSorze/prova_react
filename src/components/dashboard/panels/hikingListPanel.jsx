@@ -207,8 +207,8 @@ export default function HikingListPanel({columns, createDeleteButton}) {
             <Typography level="h2" className="title-typography" variant="solid">Hikings List</Typography>
           </Grid>
           <Grid container style={{paddingTop: "10px"}}>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={3}>
+            <Grid item xs={1} sm={2}></Grid>
+            <Grid item xs={3} sm={2}>
               <FormLabel className="field-style-add">Field</FormLabel>
               <JoyAutocomplete
                 id="controlled-demo"
@@ -230,8 +230,8 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                 sx={{height: "50px", width: "240px"}}
               />
             </Grid>
-            <Grid item xs={1}/>
-            <Grid item xs={3} /*style={{paddingTop: "22px"}}*/>
+            <Grid item xs={1} sm={1}/>
+            <Grid item xs={3} sm={2}/*style={{paddingTop: "22px"}}*/>
               <FormLabel className="field-style-add">Value</FormLabel>
               <TextField
                 //label="search"
@@ -250,8 +250,8 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                 }}
               ></TextField>
             </Grid>
-            <Grid item xs={1}/>
-            <Grid item xs={2} style={{paddingTop: "30px"}}>
+            <Grid item xs={1} sm={1}/>
+            <Grid item xs={2} sm={2} style={{paddingTop: "30px"}}>
               <Button onClick={() => {resetSearchHikingFilter()}} style={{minWidth: "215px"}}>CLEAR</Button>
             </Grid>
           </Grid>
@@ -299,10 +299,10 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                     </Popover>
                 <CardActionArea>
                 <CardMedia
-                  height="150"
+                  height="200"
                   component="img"
-                  //image="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg">
-                  image={require("../../../Sfondi/20230707_094620.jpg")}>
+                  image={`data:image/jpeg;base64,${elem.imageData}`}
+                >
                   </CardMedia>
                   <CardContent style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>
                     <div>

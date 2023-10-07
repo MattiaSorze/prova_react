@@ -39,7 +39,13 @@ export const addHikingSlice = createSlice({
         },
         fileParsingFailed: (state, action) => {
             toast.error("GPX File Parsing Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
-        }
+        },
+        imageUploadFinished: (state, action) => {
+            toast.success("Image Upload Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, theme: "dark"});
+        },
+        imageUploadFailed: (state, action) => {
+            toast.error("Image Upload Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
+        },
     },
     extraReducers:
         builder => {
@@ -69,5 +75,5 @@ export const addHikingSlice = createSlice({
         }
 });
 
-export const {updateHikingInfo, clearHikingInfo, fileParsingFinished, fileParsingFailed} = addHikingSlice.actions;
+export const {updateHikingInfo, clearHikingInfo, fileParsingFinished, fileParsingFailed, imageUploadFinished, imageUploadFailed} = addHikingSlice.actions;
 export default addHikingSlice.reducer;

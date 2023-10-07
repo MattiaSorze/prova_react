@@ -286,7 +286,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
             <Navigation />
           </Container>
         </Main>
-        <ToastContainer/>
+        <ToastContainer autoClose={3000}/>
       </Box>
     </div>
   );
