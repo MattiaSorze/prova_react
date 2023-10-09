@@ -42,7 +42,7 @@
     padding:10px;
 }
 .details-box:hover{
-    background-color: rgb(238, 238, 4);
+    background-color: rgb(137, 137, 137);
     cursor:pointer;
     border-radius: 10px;
 }

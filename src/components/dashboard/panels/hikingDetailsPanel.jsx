@@ -70,7 +70,7 @@ const HikingDetailsPanel = ({fileData}) => {
   }
 
   const appTheme = useSelector(state => state.complHikings.theme);
-  let appbarColor = appTheme === "dark" ? "rgb(198, 198, 198)" : "rgb(57, 126, 247)";
+  let appbarColor = appTheme === "dark" ? "rgb(70, 70, 70)" : "rgb(57, 126, 247)";
   return (
     <div>
       <div>
@@ -94,43 +94,43 @@ const HikingDetailsPanel = ({fileData}) => {
                 <Grid container className="app-bar-container">
                 
                   <Box className="details-box">
-                    <AccessTimeIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <AccessTimeIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {toHours(fileData.duration)} {"h"} {toMinutes(fileData.duration)} {"min"}
                     </Typography>
                   </Box>
                 
                   <Box className="details-box">
-                    <MultipleStopIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <MultipleStopIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {calcDistance(fileData.distance)} {"km"}
                     </Typography>
                   </Box>
 
                   <Box className="details-box">
-                    <ShutterSpeedIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <ShutterSpeedIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {calcAvgSpeed(fileData.averageSpeed)} {"km/h"}
                     </Typography>
                   </Box>
 
                   <Box className="details-box">
-                    <NorthEastIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <NorthEastIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {calcDistance(fileData.posElevation)} {"m"}
                     </Typography>
                   </Box>
 
                   <Box className="details-box">
-                    <VerticalAlignTopIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <VerticalAlignTopIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {calcElevation(fileData.maxElevation)} {"m"}
                     </Typography>
                   </Box>
 
                   <Box className="details-box">
-                    <VerticalAlignBottomIcon style={{color: "black"}} />
-                    <Typography level="h7" style={{color: "black"}}>
+                    <VerticalAlignBottomIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
+                    <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                       {calcElevation(fileData.minElevation)} {"m"}
                     </Typography>
                   </Box>

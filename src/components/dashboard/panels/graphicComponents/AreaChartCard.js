@@ -6,6 +6,7 @@ import {
   Area,
   ResponsiveContainer
 } from "recharts"
+import { useSelector } from "react-redux";
 
 const AreaChartCard = ({
   data,
@@ -22,11 +23,14 @@ const AreaChartCard = ({
     time: timeConvert((new Date(item.time) - new Date(startDate)) / 1000)
   }))
 
+  const appTheme = useSelector(state => state.complHikings.theme);
+  const axisColor = appTheme === "dark" ? "white" : "black";
+
   return (
     <div className="p-4 rounded-lg shadow-md bg-gray-100 text-gray-900">
       <div className="flex items-center mb-2">
         <Icon className="icon h-6 w-6 mr-2" />
-        <h3>{yAxisLabel}</h3>
+        <h3 style={{color: axisColor}}>{yAxisLabel}</h3>
       </div>
       <ResponsiveContainer width="100%" height={250}>
         <AreaChart
@@ -39,11 +43,11 @@ const AreaChartCard = ({
         >
           <XAxis
             dataKey="time"
-            tick={{fill: "black"}}
+            tick={{fill: axisColor}}
           />
           <YAxis
-            label={{ value: yAxisLabel, angle: -90, position: "insideLeft", fill: "black"}}
-            tick={{fill: "black"}}
+            label={{ value: yAxisLabel, angle: -90, position: "insideLeft", fill: axisColor}}
+            tick={{fill: axisColor}}
           />
           <Tooltip />
           <Area type="monotone" dataKey={dataKey} stroke={stroke} fill={fill} />

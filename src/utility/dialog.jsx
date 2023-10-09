@@ -16,7 +16,7 @@ export const PaperComponent = props => {
     //const classes = useStyles();
     return (
         <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
-            <Paper {...props} style={{boxShadow: "#b0aeae 2px 2px 4px"}} />
+            <Paper {...props} style={{boxShadow: "#b0aeae 1px 1px 1px 1px"}} />
         </Draggable>
     );
 };
@@ -52,7 +52,7 @@ const ModalDialog = ({ closeFunc, modalFunctions, open, title, size, component, 
     let maxWidth = size && size.width ? size.width : 'lg';
     const classes = useStyles();
     const appTheme = useSelector(state => state.complHikings.theme);
-    let dialogPaperColor = appTheme === "dark" ? "rgb(200, 200, 200)" : "white";
+    let dialogPaperColor = appTheme === "dark" ? "rgb(36, 36, 36)" : "white";
 
     return (
         <Dialog
@@ -70,7 +70,24 @@ const ModalDialog = ({ closeFunc, modalFunctions, open, title, size, component, 
             hideBackdrop={true}
         >
             <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-            <DialogContent>
+            <DialogContent 
+                sx={{
+                    overflow:"auto",
+                    scrollbarWidth: 'thin',
+                    '&::-webkit-scrollbar': {
+                        width: '0.5em',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        background: "#f1f1f1",
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#888',
+                    },
+                    '&::-webkit-scrollbar-thumb:hover': {
+                        background: '#555'
+                    }
+                }}
+            >
               
                     {component}
 
