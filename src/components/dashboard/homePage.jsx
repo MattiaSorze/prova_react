@@ -33,6 +33,13 @@ import 'react-slideshow-image/dist/styles.css';
 import {Fade} from "react-slideshow-image";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import MobileStepper from '@mui/material/MobileStepper';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+import {useTheme, Button} from "@mui/material";
+
 
 function Copyright() {
   return (
@@ -82,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
+    background: "#026BF1"
   },
   fixedHeight: {
     height: 200,
@@ -99,14 +107,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HomePage() {
+  const appTheme = useSelector(state => state.complHikings.theme);
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [autoCompValue, setAutoCompValue] = React.useState();
   const dispatch = useDispatch();
-
+  const theme = useTheme();
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+  
 
   /*const fadeImages = [
     "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
@@ -114,44 +126,116 @@ export default function HomePage() {
     "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
   ];*/
 
-  const fadeImages = require.context('../../../public/Sfondi', true);
-  const imageList = fadeImages.keys().map(image => fadeImages(image));
+  const fileImages = require.context('../../../public/Sfondi', true);
+  const imagesLabels = ["Monte Barro", "Monte Cornizzolo", "Monte Sodadura", "Lago di Molveno", "Monte Rai", "Lago di Como", "Lago di Como", "Balcone d'Italia - Lago di Lugano",
+    "Balcone d'Italia - Lago di Lugano (2)", "Lago di Montespluga", "Lago di Montespluga (2)", "Lago di Montespluga (3)", "I Giardini di Sissi (Merano)", "Lago di Morasco - Val Formazza",
+    "Lago di Cancano - Bormio", "Lago di Cancano (2) - Bormio", "Val Masino", "Val Masino (2)", "Val Masino (3)", "Rifugio Ponti - Val Masino", "Rifugio delle Odle",
+    "Rifugio delle Odle (2)", "Rifugio delle Odle (3)", "Sassolungo", "Seceda", "Sciliar", "Lago di Carezza", "Lago di Carezza (2)", "Rifugio Azzoni - Resegone", "Resegone",
+    "Lago di Morasco - Val Formazza", "Lago di Morasco - Val Formazza (2)", "Lago di Trona - Val Gerola"];
+  const imageList = fileImages.keys().map((image, index) => 
+    {return {label: imagesLabels[index], imgData: fileImages(image)}});
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = imageList.length;
 
-  const showImages = () => {
-    return (<Fade>
-    {imageList.map(image => {return
-      <div className="each-fade">
-          <img src={image} className="img" />
-        </div>})}
-    </Fade>);
+    const handleNext = () => {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+  
+    const handleBack = () => {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
+  
+    const handleStepChange = (step) => {
+      setActiveStep(step);
     };
 
   return (
     <div className={classes.root}>
-          <Grid container className={classes.space}>
-          <Grid item xs={12} className={classes.space}>
-            <Typography level="h2" className="homepage-typography">Welcome to Hiking App</Typography>
-          </Grid>
-          </Grid>
-          <Card className="homepage-card">
-            <div style={{paddingBottom: "25px", paddingTop: "32px"}}>
-            <Fade
-              duration={3000}
-              transitionDuration={1000}
-              pauseOnHover={true}
-              nextArrow={<ArrowForwardIosIcon className="show-right-image"/>}
-              prevArrow={<ArrowBackIosIcon className="show-left-image"/>}>
-            {imageList.map((image, index) => (
-            <div key={index} className="each-fade">
-          <img src={image} className="img" />
-        </div>
-      ))}
-      </Fade>
-        </div>
-          </Card>
-          <Box pt={2}>
-            <Copyright />
-          </Box>
+      <Grid container className={classes.space}>
+        <Grid item xs={12} className={classes.space}>
+          <Typography level="h2" className="homepage-typography">Welcome to Hiking App</Typography>
+        </Grid>
+      </Grid>
+      <Box sx={{ width: 1000, height: 708, flexGrow: 1, border: appTheme ==="dark" ? "1px solid blue" : "1px solid black", boxShadow: "2px 2px #C2C2C2" }}>
+        <Paper
+          square
+          elevation={0}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            height: 50,
+            pl: 2,
+            //bgcolor: 'background.default',
+          }}
+          className={classes.paper}
+        >
+          <Typography level="h4" sx={{textAlign: "center", paddingTop: "10px", paddingBottom: "10px", color: "white"}}>{imageList[activeStep].label}</Typography>
+        </Paper>
+        <AutoPlaySwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+          {imageList.map((step, index) => (
+            <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box
+                  component="img"
+                  sx={{
+                    height: 600,
+                    display: "block",
+                    width: 1000,
+                    overflow: 'hidden',
+                    width: '100%',
+                  }}
+                  src={step.imgData}
+                  alt={"ciao"}
+                />
+              ) : null}
+            </div>
+          ))}
+        </AutoPlaySwipeableViews>
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          sx={{width: 999, height: "42px", background: "#026BF1"}}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: appTheme === "dark" ? "#3DE503" : "#026BF1"}}}
+            >
+              Next
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: appTheme === "dark" ? "#3DE503" : "#026BF1"}}}
+            >
+              {theme.direction === 'rtl' ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Back
+            </Button>
+          }
+        />
+      </Box>
+      <Box pt={2}>
+        <Copyright />
+      </Box>
     </div>
   );
 }

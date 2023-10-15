@@ -10,7 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { getSettings } from '../redux/services/addHikingsService';
 import { getHikingsData } from '../redux/services/getHikingsService';
 import { useEffect } from 'react';
@@ -39,6 +39,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import {Backdrop} from '@mui/material';
+import { PacmanLoader } from 'react-spinners';
+import { checkLoading } from '../utility/utility';
 
 const drawerWidth = 240;
 
@@ -236,10 +239,16 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     </Box>
   );
 
+  let addHikingLoading = useSelector(state => state.addHiking.loading);
+  let complHikingsLoading = useSelector(state => state.complHikings.loading);
+
   return (
     <div className="App" id={themeParent}>
       <Box sx={{ display: 'flex', minWidth: "1500px" }}>
         <CssBaseline />
+        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
+          <PacmanLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
+        </Backdrop>
         <AppBar position="fixed" open={open} className="app-bar-style">
           <Toolbar style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingLeft: "8px"}}>
             <IconButton
