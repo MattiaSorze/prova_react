@@ -156,7 +156,8 @@ export default function HomePage() {
           <Typography level="h2" className="homepage-typography">Welcome to Hiking App</Typography>
         </Grid>
       </Grid>
-      <Box sx={{ width: 1000, height: 708, flexGrow: 1, border: appTheme ==="dark" ? "1px solid blue" : "1px solid black", boxShadow: "2px 2px #C2C2C2" }}>
+      <Box sx={{ /*width: 1000, height: 708,*/ flexGrow: 1, border: appTheme ==="dark" ? "1px solid blue" : "1px solid black", boxShadow: "2px 2px #C2C2C2" }}
+        className="box-slider-container">
         <Paper
           square
           elevation={0}
@@ -183,14 +184,15 @@ export default function HomePage() {
                 <Box
                   component="img"
                   sx={{
-                    height: 600,
+                    //height: 600,
                     display: "block",
-                    width: 1000,
+                    //width: 1000,
                     overflow: 'hidden',
-                    width: '100%',
+                    //width: '100%',
                   }}
                   src={step.imgData}
                   alt={"ciao"}
+                  className="image-container"
                 />
               ) : null}
             </div>
@@ -200,13 +202,14 @@ export default function HomePage() {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
-          sx={{width: 999, height: "42px", background: "#026BF1"}}
+          sx={{/*width: 999, height: "42px",*/ background: "#026BF1"}}
+          className="slider-container"
           nextButton={
             <Button
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
-              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: appTheme === "dark" ? "#3DE503" : "#026BF1"}}}
+              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
             >
               Next
               {theme.direction === 'rtl' ? (
@@ -221,7 +224,7 @@ export default function HomePage() {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
-              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: appTheme === "dark" ? "#3DE503" : "#026BF1"}}}
+              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
             >
               {theme.direction === 'rtl' ? (
                 <KeyboardArrowRight />
@@ -231,6 +234,8 @@ export default function HomePage() {
               Back
             </Button>
           }
+          variant="progress"
+          LinearProgressProps={{color: "inherit"}}
         />
       </Box>
       <Box pt={2}>
