@@ -156,7 +156,7 @@ export default function HomePage() {
           <Typography level="h2" className="homepage-typography">Welcome to Hiking App</Typography>
         </Grid>
       </Grid>
-      <Box sx={{ /*width: 1000, height: 708,*/ flexGrow: 1, border: appTheme ==="dark" ? "1px solid blue" : "1px solid black", boxShadow: "2px 2px #C2C2C2" }}
+      <Box sx={{ /*width: 1000, height: 708,*/ flexGrow: 1, /*border: appTheme ==="dark" ? "1px solid blue" : "1px solid black",*/ boxShadow: "3px 3px #434343" }}
         className="box-slider-container">
         <Paper
           square
@@ -209,7 +209,8 @@ export default function HomePage() {
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
-              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
+              className="image-slider-button"
+              //sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
             >
               Next
               {theme.direction === 'rtl' ? (
@@ -224,7 +225,8 @@ export default function HomePage() {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
-              sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
+              className="image-slider-button"
+              //sx={{color: "white", "&:hover": {cursor: "pointer", color: "white", backgroundColor: "#3DE503"}}}
             >
               {theme.direction === 'rtl' ? (
                 <KeyboardArrowRight />
@@ -235,7 +237,7 @@ export default function HomePage() {
             </Button>
           }
           variant="progress"
-          LinearProgressProps={{color: "inherit"}}
+          LinearProgressProps={{color: "error", variant: "determinate"}}
         />
       </Box>
       <Box pt={2}>
