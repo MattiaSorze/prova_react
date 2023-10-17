@@ -45,9 +45,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center" className="copy-right-home">
       {"Copyright © "}
-      <Link color="inherit" href="#">
         Hiking App
-      </Link>{" "}
+      {" "}
       {new Date().getFullYear()}
       {". "}
       {"All Rights Reserved."}

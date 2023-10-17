@@ -42,6 +42,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {Backdrop} from '@mui/material';
 import { PacmanLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
+import {Grid} from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -62,7 +63,7 @@ const closedMixin = (theme) => ({
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(8)} + 15px)`,
   },
 });
 
@@ -213,28 +214,39 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     >
         {open ? <Divider className="divider-style"/> : null}
         <List>
-          <ListItem button component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
-            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
-            <FontAwesomeIcon icon={faHouse} size="lg" />
-            </ListItemIcon>
-            <ListItemText primary="Home"/>
-          </ListItem>
-          <Tooltip title="Hikings List" placement="right">
-            <ListItem button component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
-              <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
-                <FontAwesomeIcon icon={faPersonHiking} size="lg" />
-              </ListItemIcon>
-              <ListItemText primary="Hikings"/>
-            </ListItem>
-        </Tooltip>
-        <Tooltip title="Add Hiking" placement="right">
-          <ListItem button component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#666666" : "#ECEBEB"}, borderRadius: "8px"}}>
-            <ListItemIcon style={{color: themeParent === "dark" ? "white" : "gray", paddingLeft: "5px"}}>
-              <FontAwesomeIcon icon={faCirclePlus} size="lg"/>
-            </ListItemIcon>
-            <ListItemText primary="Add"/>
-          </ListItem>
-        </Tooltip>
+          {!open ?
+            <Box className="custom-list-item" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+              <FontAwesomeIcon icon={faHouse} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon" />
+              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Home</Typography>
+            </Box> 
+          :
+          <Box className="custom-list-item-open" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+            <FontAwesomeIcon icon={faHouse} size="lg" style={{paddingTop: "5px", paddingLeft: "16px"}} className="custom-list-item-icon"/>
+            <Typography variant="subtitle1" style={{paddingTop: "4px"}} className="custom-list-item-icon">Home</Typography>
+          </Box>
+          }
+          {!open ?
+            <Box className="custom-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+              <FontAwesomeIcon icon={faPersonHiking} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon" />
+              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Hikings</Typography>
+            </Box> 
+          :
+          <Box className="custom-list-item-open" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+            <FontAwesomeIcon icon={faPersonHiking} size="lg" style={{paddingTop: "5px", paddingLeft: "18px"}} className="custom-list-item-icon"/>
+            <Typography variant="subtitle1" style={{paddingTop: "3px", paddingLeft: "5px"}} className="custom-list-item-icon">Hikings List</Typography>
+          </Box>
+          }
+          {!open ?
+            <Box className="custom-list-item" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
+              <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon"/>
+              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Add</Typography>
+            </Box> 
+          :
+          <Box className="custom-list-item-open" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
+            <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{paddingTop: "5px", paddingLeft: "18px"}} className="custom-list-item-icon"/>
+            <Typography variant="subtitle1" style={{paddingTop: "3px"}} className="custom-list-item-icon">Add Hiking</Typography>
+          </Box>
+          }
         </List>
     </Box>
   );
@@ -250,23 +262,26 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
           <PacmanLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
         </Backdrop>
         <AppBar position="fixed" open={open} className="app-bar-style">
-          <Toolbar style={{display: "flex", flexDirection: "row", justifyContent: "space-between", paddingLeft: "8px"}}>
-            <IconButton
-                aria-label="open drawer"
-                edge="end"
-                onClick={handleDrawerOpen}
-                sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#09bd09"}, marginLeft: "4px"}}
-            >
-              {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
-            </IconButton> 
-                <Typography variant="h5" noWrap className="app-bar-title-typography" component={Link} to="/">
-                  Hiking App
-                </Typography>
-                {/*<Toggle onChange={changeToggleTheme} checked={themeParent === "dark"} style={{color: "blue"}}/>*/}
-                <FormControlLabel
+          <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
+            <Grid container>
+              <Grid item xs={2}>
+                <IconButton
+                    aria-label="open drawer"
+                    edge="end"
+                    onClick={handleDrawerOpen}
+                    sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#09bd09"}, marginLeft: "12px", marginTop: "5px", scale: "1.1"}}
+                >
+                  {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
+                </IconButton>
+              </Grid>
+              <Grid item xs={9}/>
+              <Grid item xs={1}>
+                <FormControlLabel style={{paddingLeft: "15px"}}
                   control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
                   label={themeParent === "dark" ? "Dark" : "Light"}
-            /> 
+                />
+              </Grid>
+            </Grid> 
           </Toolbar>
         </AppBar>
         <Drawer 
