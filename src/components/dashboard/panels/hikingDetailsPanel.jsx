@@ -70,7 +70,7 @@ const HikingDetailsPanel = ({fileData}) => {
   }
 
   const appTheme = useSelector(state => state.complHikings.theme);
-  let appbarColor = appTheme === "dark" ? "rgb(70, 70, 70)" : "rgb(57, 126, 247)";
+  let appbarColor = appTheme === "dark" ? "rgb(70, 70, 70)" : "rgb(200, 1, 1)";
   return (
     <div>
       <div>
@@ -79,10 +79,6 @@ const HikingDetailsPanel = ({fileData}) => {
         {fileData && (
           <>
             <div ref={summaryRef}>
-
-              <Typography level="h4" variant="soft" textAlign="center" padding="10px" style={{backgroundColor: "lightgreen"}}>
-                {fileData.title}
-              </Typography>
               <div style={{paddingTop: "15px"}}/>
               <Typography level="h6" textAlign="center" variant="soft" style={{color: "white", backgroundColor: "blue"}}>
                 Completed on {new Date(fileData.date).toLocaleDateString("it-IT")}

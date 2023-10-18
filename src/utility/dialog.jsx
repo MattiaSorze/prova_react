@@ -21,7 +21,7 @@ export const PaperComponent = props => {
     );
 };
 
-const ModalDialog = ({ closeFunc, modalFunctions, open, title, size, component, importFunc }) => { //importFunc è la funzione di import file e viene passata in ingresso a questo componente soltanto quando necessaria (es: parameter override)
+const OldDialog = ({ closeFunc, modalFunctions, open, title, size, component, importFunc }) => { //importFunc è la funzione di import file e viene passata in ingresso a questo componente soltanto quando necessaria (es: parameter override)
     const useStyles = makeStyles(theme => ({
         /*"@global": {
             body: {
@@ -112,4 +112,4 @@ const ModalDialog = ({ closeFunc, modalFunctions, open, title, size, component, 
         </Dialog>
     );
 }
-export default ModalDialog;
+export default OldDialog;
