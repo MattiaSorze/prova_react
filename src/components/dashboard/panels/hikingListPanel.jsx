@@ -301,7 +301,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                 <CardMedia
                   height="200"
                   component="img"
-                  image={`data:image/jpeg;base64,${elem.imageData}`}
+                  image={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`}
                 >
                   </CardMedia>
                   <CardContent style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly"}}>

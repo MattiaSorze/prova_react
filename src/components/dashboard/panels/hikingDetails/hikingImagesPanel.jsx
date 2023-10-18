@@ -106,7 +106,7 @@ export default function HikingImagesPanel({fileImages}) {
     <div className={classes.root}>
         <Box sx={{flexGrow: 1}}
         className="box-slider-container-image">
-        <Paper
+        {/*<Paper
           square
           elevation={0}
           sx={{
@@ -118,7 +118,7 @@ export default function HikingImagesPanel({fileImages}) {
           className={classes.paper}
         >
           <Typography level="h4" sx={{textAlign: "center", paddingTop: "10px", paddingBottom: "10px", color: "white"}}>{imageList[activeStep].label}</Typography>
-        </Paper>
+        </Paper>*/}
         <AutoPlaySwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={activeStep}
@@ -149,7 +149,7 @@ export default function HikingImagesPanel({fileImages}) {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
-          sx={{width: "650px", height: "50px", background: "#026BF1", textAlign: "left"}}
+          sx={{background: "#026BF1", textAlign: "left"}}
           className="slider-container-detail"
           nextButton={
             <Button

@@ -225,34 +225,33 @@ export default function AddHiking() {
       }
     }
 
-    const convertImageToBase64 = (file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          resolve(reader.result.split(',')[1]);  // Restituisci solo il Base64, escludendo il prefisso 'data:image/jpeg;base64,'
-        };
-        reader.onerror = (error) => reject(error);
-        reader.readAsDataURL(file);
-      });
-    };
-
     const handleImageUpload = async (event) => {
-      const file = event.target.files[0];
-
-      if (file) {
-        try {
-          const base64Image = await convertImageToBase64(file);
-          // Invia l'immagine in Base64 al server
-          dispatch(imageUploadFinished());
-          setImageData(base64Image);
-          dispatch(updateHikingInfo({value: base64Image, propertyName: "imageData"}));
-          //sendBase64ImageToServer(base64Image);
-        } catch (error) {
-          console.log(error);
-          dispatch(imageUploadFailed());
-        }
+      const files = event.target.files;
+      const fileStringsArray = [];
+  
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+  
+        reader.onload = async (e) => {
+          let fileString = e.target.result;
+          fileString = fileString.replace(/^data:image\/[a-z]+;base64,/, '');
+          fileStringsArray.push(fileString);
+  
+          if (fileStringsArray.length === files.length) {
+            // All files have been processed, update state with base64 strings
+            dispatch(imageUploadFinished());
+            setImageData(fileStringsArray);
+            dispatch(updateHikingInfo({value: fileStringsArray, propertyName: "imageData"}));
+          }
+        };
+  
+        reader.readAsDataURL(file);
       }
     }
+
+    const isFileGpxLoaded = fileData ? true : false;
+    const isFileImagesLoaded = imageData ? true : false;
 
     return (
             <div className={classes.content}>
@@ -392,6 +391,7 @@ export default function AddHiking() {
                                 onFileChange={handleFileChange}
                                 fileName={fileData && fileData.fileName}
                                 label="UPLOAD GPX"
+                                isFileLoaded={isFileGpxLoaded}
                               />
                             </Grid>
                             <Grid item xs={1} className={classes.uploadButton}>
@@ -399,6 +399,7 @@ export default function AddHiking() {
                                 onFileChange={handleImageUpload}
                                 fileName={fileData && fileData.fileName}
                                 label="UPLOAD IMAGES"
+                                isFileLoaded={isFileImagesLoaded}
                               />
                             </Grid>
                             <Grid item xs={12} className={classes.appBarSpacer}></Grid>

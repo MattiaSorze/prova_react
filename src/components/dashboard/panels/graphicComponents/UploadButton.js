@@ -2,8 +2,9 @@
 import { Button } from "@mui/joy"
 import { useRef } from "react"
 import "../../addHiking.css";
+import CheckIcon from '@mui/icons-material/Check';
 
-const UploadButton = ({ onFileChange, fileName, label }) => {
+const UploadButton = ({ onFileChange, fileName, label, isFileLoaded }) => {
   const fileInputRef = useRef(null)
 
   const handleUploadClick = () => {
@@ -16,6 +17,7 @@ const UploadButton = ({ onFileChange, fileName, label }) => {
         //className="bg-blue-500 text-white px-4 py-2 rounded-md"
         className="upload-button-style"
         onClick={handleUploadClick}
+        endDecorator={isFileLoaded ? <CheckIcon/> : null}
       >
         {label}
       </Button>
@@ -24,6 +26,7 @@ const UploadButton = ({ onFileChange, fileName, label }) => {
         ref={fileInputRef}
         type="file"
         onChange={onFileChange}
+        multiple={true}
       />
     </div>
   )

@@ -1,28 +1,30 @@
 @media (max-width: 1600px) {
     .box-slider-container-image{
-        width: 650px;
-        height: 390px;
+        width: 600px;
+        height: 430px;
+        padding-top: 30px;
     }
     .image-container-detail{
-        width: 650px;
-        height: 320px;
+        width: 600px;
+        height: 370px;
     }
     .slider-container-detail {
-        width: 650px;
+        width: 600px;
         height: 50px;
     }
 }
 @media (min-width: 1600px) {
     .box-slider-container-image{
-        width: 800px;
-        height: 500px;
+        width: 700px;
+        height: 540px;
+        padding-top: 30px;
     }
     .image-container-detail{
-        width: 800px;
-        height: 430px;
+        width: 700px;
+        height: 480px;
     }
     .slider-container-detail {
-        width: 800px;
+        width: 700px;
         height: 50px;
     }
 }

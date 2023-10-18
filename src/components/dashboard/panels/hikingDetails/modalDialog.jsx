@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -15,6 +15,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import HikingImagesPanel from './hikingImagesPanel';
 import "./modalDialog.css";
+import { deleteHikingsData } from '../../../../redux/services/getHikingsService';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -46,6 +47,7 @@ function CustomTabPanel(props) {
 
 export default function ModalDialog({component, openComplHikingDetail, hikingElem, closePopover}) {
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
     let size = null;
     const handleClickOpen = () => {
         setOpen(true);
@@ -56,6 +58,11 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
         setOpen(false);
         closePopover();
     };
+
+    const handleDeleteHiking = () => {
+      dispatch(deleteHikingsData(hikingElem.id));
+      closePopover();
+    }
     const PaperComponent = props => {
         //const classes = useStyles();
         return (
@@ -74,12 +81,17 @@ const [value, setValue] = React.useState(0);
   let dialogPaperColor = appTheme === "dark" ? "rgb(36, 36, 36)" : "white";
   let fullWidth = true;
   let maxWidth = size && size.width ? size.width : 'lg';
-  const fileImages = [hikingElem.imageData];
+  const fileImages = hikingElem.imageData;
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen} className="view-details-style">
+      <div style={{display:"flex", flexDirection: "column"}}>
+      <Button variant="standard" onClick={handleClickOpen} className="view-details-style">
         View Details
       </Button>
+      <Button variant="standard" onClick={() => handleDeleteHiking()} className="view-details-style">
+        Delete
+      </Button>
+      </div>
         <Dialog
             fullWidth={fullWidth}
             maxWidth={maxWidth} 
