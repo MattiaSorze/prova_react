@@ -1,23 +1,40 @@
 .button-style {
-    background-color:rgb(102, 168, 3) !important;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color:rgb(0, 82, 246) !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: normal !important;
     min-width: 100px;
 }
 .button-style:hover {
-    background-color:green !important
+    background-color:rgb(0, 58, 184) !important
+}
+.button-style:active {
+    background-color: rgb(0, 47, 148) !important;
+}
+.button-style:disabled {
+    background-color: rgb(187, 187, 187) !important;
 }
 .upload-button-style {
     color:white;
-    width: 40%;
-    background-color:rgb(102, 168, 3) !important;
+    --width: 40%;
+    background-color:rgb(0, 82, 246) !important;
     --transition-duration: 0.5s !important;
     --transition-property: width !important;
-    min-width: 150px;
+    min-width: 335px;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: normal !important;
 }
 .upload-button-style:hover {
     color:white;
-    background-color: green !important;
+    background-color: rgb(0, 58, 184) !important;
     --width: 97%;
+}
+.upload-button-style:active {
+    color:white;
+    background-color: rgb(0, 47, 148) !important;
+    --width: 97%;
+}
+.upload-button-style:disabled {
+    background-color: rgb(187, 187, 187) !important;
 }
 .input-style {
     display: none;
@@ -25,7 +42,7 @@
 #light .typography-style-add{
     text-align: center;
     padding:10px;
-    color: darkgreen !important;
+    color: black !important;
 }
 #dark .typography-style-add{
     text-align: center;

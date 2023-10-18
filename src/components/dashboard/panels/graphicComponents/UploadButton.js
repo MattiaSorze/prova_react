@@ -4,7 +4,7 @@ import { useRef } from "react"
 import "../../addHiking.css";
 import CheckIcon from '@mui/icons-material/Check';
 
-const UploadButton = ({ onFileChange, fileName, label, isFileLoaded }) => {
+const UploadButton = ({ onFileChange, fileName, label, isFileLoaded, leftIcon, disabled }) => {
   const fileInputRef = useRef(null)
 
   const handleUploadClick = () => {
@@ -14,12 +14,15 @@ const UploadButton = ({ onFileChange, fileName, label, isFileLoaded }) => {
   return (
     <div>
       <Button
-        //className="bg-blue-500 text-white px-4 py-2 rounded-md"
         className="upload-button-style"
         onClick={handleUploadClick}
-        endDecorator={isFileLoaded ? <CheckIcon/> : null}
+        //startDecorator={leftIcon}
+        //endDecorator={isFileLoaded ? <CheckIcon style={{marginLeft: "15px"}}/> : null}
+        disabled={disabled}
       >
-        {label}
+        <div style={{width: "30%", marginTop: "2px"}}>{leftIcon}</div>
+        <div style={{width: "70%", marginTop: "1px"}}>{label}</div>
+        <div style={{width: "30%", marginTop: "2px"}}>{isFileLoaded ? <CheckIcon/> : null}</div>
       </Button>
       <input
         className="input-style"

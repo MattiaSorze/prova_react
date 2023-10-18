@@ -43,6 +43,7 @@ import {Backdrop} from '@mui/material';
 import { PacmanLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
 import {Grid} from "@mui/material";
+import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
 
 const drawerWidth = 240;
 
@@ -133,6 +134,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
   const loadSettings = () => {
     dispatch(getSettings());
     dispatch(getHikingsData());
+    dispatch(clearHikingInfo());
   }
 
   const loadHikingsData = () => {

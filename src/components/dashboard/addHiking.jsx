@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -36,6 +36,8 @@ import { parseGPX } from "../../utility/gpxParser";
 import UploadButton from "./panels/graphicComponents/UploadButton";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import RouteIcon from '@mui/icons-material/Route';
 
 function Copyright() {
   return (
@@ -253,6 +255,36 @@ export default function AddHiking() {
     const isFileGpxLoaded = fileData ? true : false;
     const isFileImagesLoaded = imageData ? true : false;
 
+    function disableSave() {
+      if(hikingInfo.region && hikingInfo.country && hikingInfo.name && hikingInfo.hikingDate && hikingInfo.status)
+        return false;
+      else
+        return true;
+    }
+
+    function clearHiking() {
+      dispatch(clearHikingInfo());
+      setFileData(null);
+      setImageData(null);
+    }
+
+    useEffect(() => {
+      if(hikingInfo.gpxData !== fileData && fileData){
+        setFileData(hikingInfo.gpxData);
+      }
+      if(hikingInfo.imageData !== imageData && imageData){
+        setImageData(hikingInfo.imageData);
+      }
+    }, [hikingInfo.gpxData, hikingInfo.imageData])
+
+    function saveHiking() {
+      dispatch(saveHikingData({hikingData: hikingInfo}));
+      setFileData(null);
+      setImageData(null);
+    }
+
+    const isSaveDisabled = disableSave();
+
     return (
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
@@ -371,45 +403,47 @@ export default function AddHiking() {
                                   renderInput={(params) => (
                                     <TextField {...params} label="Status" variant="standard" />
                                   )}
-                                  /*sx={{
-                                      '.MuiAutocomplete-popupIndicator:hover': {
-                                        backgroundColor: "#04B504"
-                                      },
-                                      '.MuiAutocomplete-popupIndicatorOpen': {          
-                                        backgroundColor: "green"
-                                      },
-                                      '.MuiAutocomplete-clearIndicator': {          
-                                        backgroundColor: "#04B504"
-                                      }
-                                  }}*/
                                 />
                               </FormControl>
                             </Grid>
-                            <Grid item xs={1}></Grid>
-                            <Grid item xs={1} className={classes.uploadButton}>
+                            <Grid item xs={4}></Grid>
+                            <Grid item xs={12} className={classes.gridSeparator}></Grid>
+                            <div className={classes.div}></div>
+                            <Grid item xs={2} className={classes.uploadButton}>
                               <UploadButton
                                 onFileChange={handleFileChange}
                                 fileName={fileData && fileData.fileName}
                                 label="UPLOAD GPX"
                                 isFileLoaded={isFileGpxLoaded}
+                                leftIcon={<RouteIcon style={{marginRight: "15px"}}/>}
+                                disabled={isSaveDisabled}
                               />
                             </Grid>
-                            <Grid item xs={1} className={classes.uploadButton}>
+                            <Grid item xs={2}/>
+                            <Grid item xs={2} className={classes.uploadButton}>
                               <UploadButton
                                 onFileChange={handleImageUpload}
                                 fileName={fileData && fileData.fileName}
                                 label="UPLOAD IMAGES"
                                 isFileLoaded={isFileImagesLoaded}
+                                leftIcon={<PhotoSizeSelectActualIcon style={{marginRight: "15px"}}/>}
+                                disabled={isSaveDisabled}
                               />
                             </Grid>
                             <Grid item xs={12} className={classes.appBarSpacer}></Grid>
                             <Grid item xs={5} className={classes.gridItem}></Grid>
                             <Grid item xs={1} className={classes.gridItem}>
-                              <Button className="button-style" onClick={() => dispatch(saveHikingData({hikingData: hikingInfo}))}>SAVE</Button>
+                              <Button 
+                                className="button-style" 
+                                onClick={() => saveHiking()}
+                                disabled={isSaveDisabled}
+                              >
+                                SAVE
+                              </Button>
                             </Grid>
                             <div style={{minWidth: "20px"}}/>
                             <Grid item xs={1} className={classes.gridItem}>
-                              <Button className="button-style" onClick={() => dispatch(clearHikingInfo())}>CLEAR</Button>
+                              <Button className="button-style" onClick={() => clearHiking()}>CLEAR</Button>
                             </Grid>
                             <Grid item xs={4} className={classes.gridItem}></Grid>
                         </Grid>
