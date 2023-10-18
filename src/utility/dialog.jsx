@@ -8,7 +8,7 @@ import Draggable from "react-draggable";
 import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
-import "../components/dashboard/panels/hikingDetailsPanel.css";
+import "../components/dashboard/panels/hikingDetails/hikingDetailsPanel.css";
 import Slide from '@mui/material/Slide';
 import { useSelector } from 'react-redux';
 

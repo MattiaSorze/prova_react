@@ -10,13 +10,13 @@ import {
   ForwardIcon
 } from "@heroicons/react/24/solid";
 
-import { parseGPX } from "../../../utility/gpxParser";
-import SummaryCard from "./graphicComponents/SummaryCard";
-import UploadButton from "./graphicComponents/UploadButton"
-import AreaChartCard from "./graphicComponents/AreaChartCard"
-import ScreenshotButton from "./graphicComponents/ScreenshotButton"
-import IntroductionMessage from "./graphicComponents/IntroductionMessage"
-import { updateHikingInfo } from "../../../features/addHiking/addHikingSlice";
+import { parseGPX } from "../../../../utility/gpxParser";
+import SummaryCard from "../graphicComponents/SummaryCard";
+import UploadButton from "../graphicComponents/UploadButton"
+import AreaChartCard from "../graphicComponents/AreaChartCard"
+import ScreenshotButton from "../graphicComponents/ScreenshotButton"
+import IntroductionMessage from "../graphicComponents/IntroductionMessage"
+import { updateHikingInfo } from "../../../../features/addHiking/addHikingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/joy";
 import { AppBar, Toolbar } from "@mui/material";

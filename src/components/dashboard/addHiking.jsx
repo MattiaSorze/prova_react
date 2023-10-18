@@ -30,7 +30,7 @@ import { Button } from "@mui/joy";
 import { saveHikingData } from "../../redux/services/addHikingsService";
 import "./addHiking.css";
 import GpxReader from "../../utility/gpxReader";
-import HikingDetailsPanel from "./panels/hikingDetailsPanel";
+import HikingDetailsPanel from "./panels/hikingDetails/hikingDetailsPanel";
 import { useState } from "react";
 import { parseGPX } from "../../utility/gpxParser";
 import UploadButton from "./panels/graphicComponents/UploadButton";

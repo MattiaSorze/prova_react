@@ -4,7 +4,7 @@ import "../../dashboard.css";
 import ModalDialog from "../../../utility/dialog";
 import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchField, updateFilteredHikingData} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import HikingDetailsPanel from "./hikingDetailsPanel";
+import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Card, CardContent, CardMedia, Paper, CardActionArea, CardActions, CardHeader, TextField } from "@mui/material";
 import Tooltip, {tooltipClasses } from "@mui/material/Tooltip";
 import { Grid } from "@material-ui/core";

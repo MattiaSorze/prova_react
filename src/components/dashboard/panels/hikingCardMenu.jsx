@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import "./hikingCardMenu.css";
 import { Typography } from '@mui/joy';
-import ModalDialog from '../../../utility/modalDialog';
-import HikingDetailsPanel from './hikingDetailsPanel';
+import ModalDialog from "../panels/hikingDetails/modalDialog";
+import HikingDetailsPanel from './hikingDetails/hikingDetailsPanel';
 import { selectHikingDetail, closeComplHikingDetailDialog } from '../../../features/completedHikings/completedHikingsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 

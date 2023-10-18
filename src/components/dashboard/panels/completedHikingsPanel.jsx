@@ -6,7 +6,7 @@ import "../../dashboard.css";
 import ModalDialog from "../../../utility/dialog";
 import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import HikingDetailsPanel from "./hikingDetailsPanel";
+import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Paper } from "@mui/material";
 
 export default function CompletedHikingsPanel({completedHikings, columns, createDeleteButton}) {

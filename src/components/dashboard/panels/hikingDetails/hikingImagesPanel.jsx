@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     background: "#026BF1",
-    width: "650px"
+    //width: "650px"
   },
   fixedHeight: {
     height: 200,
@@ -149,7 +149,7 @@ export default function HikingImagesPanel({fileImages}) {
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
-          sx={{width: "650px", height: "50px", background: "#026BF1"}}
+          sx={{width: "650px", height: "50px", background: "#026BF1", textAlign: "left"}}
           className="slider-container-detail"
           nextButton={
             <Button
@@ -183,7 +183,7 @@ export default function HikingImagesPanel({fileImages}) {
               Back
             </Button>
           }
-          variant="progress"
+          variant="text"
           LinearProgressProps={{color: "error", variant: "determinate"}}
         />
         </Box>

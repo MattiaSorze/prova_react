@@ -10,11 +10,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Draggable from "react-draggable";
 import Paper from "@mui/material/Paper";
 import {Tab, Tabs, Typography, Box} from "@mui/material";
-import HikingDetailsPanel from '../components/dashboard/panels/hikingDetailsPanel';
-import "../components/dashboard/panels/hikingDetailsPanel.css";
+import HikingDetailsPanel from './hikingDetailsPanel';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import HikingImagesPanel from '../components/dashboard/panels/hikingDetails/hikingImagesPanel';
+import HikingImagesPanel from './hikingImagesPanel';
+import "./modalDialog.css";
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -86,7 +86,7 @@ const [value, setValue] = React.useState(0);
             open={open}
             onClose={handleClose}
             PaperComponent={PaperComponent}
-            PaperProps={{ sx: { backgroundColor: dialogPaperColor, width: "1100px", height: "650px"} }}
+            PaperProps={{ sx: { backgroundColor: dialogPaperColor}, className: "modal-dialog-paper" }}
             keepMounted
             hideBackdrop={false}
         >
