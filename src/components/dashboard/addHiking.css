@@ -50,7 +50,7 @@
     color: white !important;
 }
 .toast-message{
-    background: rgba(0, 0, 239, 0.751);
+    background: rgba(0, 48, 181, 0.751) !important;
     color: white !important;
 }
 .toast-message-error{

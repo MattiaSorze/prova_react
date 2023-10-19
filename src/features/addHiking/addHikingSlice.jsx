@@ -35,16 +35,16 @@ export const addHikingSlice = createSlice({
             state.hikingInfo = initialState.hikingInfo;
         },
         fileParsingFinished: (state, action) => {
-            toast.success("GPX File Parsing Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, theme: "dark"});
+            toast.success("GPX File Parsing Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
         },
         fileParsingFailed: (state, action) => {
-            toast.error("GPX File Parsing Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
+            toast.error("GPX File Parsing Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
         },
         imageUploadFinished: (state, action) => {
-            toast.success("Image Upload Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, theme: "dark"});
+            toast.success("Image Upload Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
         },
         imageUploadFailed: (state, action) => {
-            toast.error("Image Upload Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
+            toast.error("Image Upload Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
         },
     },
     extraReducers:
@@ -66,11 +66,11 @@ export const addHikingSlice = createSlice({
                 .addCase(saveHikingData.fulfilled, (state, action) => {
                     state.loading = false;
                     state.hikingInfo = initialState.hikingInfo;
-                    toast.success("Data Saved!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, theme: "dark"});
+                    toast.success("Data Saved!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
                 })
                 .addCase(saveHikingData.rejected, (state, action) => {
                     state.loading = false;
-                    toast.error("Error in saving data: " +action.error, {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
+                    toast.error("Error in saving data: " +action.error, {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
                 })
         }
 });
