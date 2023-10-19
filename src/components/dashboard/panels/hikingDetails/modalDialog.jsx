@@ -16,6 +16,7 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import HikingImagesPanel from './hikingImagesPanel';
 import "./modalDialog.css";
 import { deleteHikingsData } from '../../../../redux/services/getHikingsService';
+import DeletionDialog from './deletionDialog';
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,6 +63,7 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
     const handleDeleteHiking = () => {
       dispatch(deleteHikingsData(hikingElem.id));
       closePopover();
+      setOpenDeletionDialog(false);
     }
     const PaperComponent = props => {
         //const classes = useStyles();
@@ -71,7 +73,8 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
             </Draggable>
     );
 };
-const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
+  const [openDeletionDialog, setOpenDeletionDialog] = React.useState(false); 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -88,7 +91,7 @@ const [value, setValue] = React.useState(0);
       <Button variant="standard" onClick={handleClickOpen} className="view-details-style">
         View Details
       </Button>
-      <Button variant="standard" onClick={() => handleDeleteHiking()} className="view-details-style">
+      <Button variant="standard" onClick={() => setOpenDeletionDialog(true)} className="view-details-style">
         Delete
       </Button>
       </div>
@@ -150,6 +153,7 @@ const [value, setValue] = React.useState(0);
             </div>
         </DialogActions>
       </Dialog>
+      <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={closePopover}/>
     </div>
   );
 }
