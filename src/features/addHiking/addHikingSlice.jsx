@@ -41,10 +41,10 @@ export const addHikingSlice = createSlice({
             toast.error("GPX File Parsing Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
         },
         imageUploadFinished: (state, action) => {
-            toast.success("Image Upload Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
+            toast.success("Images Upload Done!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
         },
         imageUploadFailed: (state, action) => {
-            toast.error("Image Upload Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
+            toast.error("Images Upload Failed!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
         },
     },
     extraReducers:
