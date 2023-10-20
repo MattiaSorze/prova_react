@@ -88,10 +88,10 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
   return (
     <div>
       <div style={{display:"flex", flexDirection: "column"}}>
-      <Button variant="standard" onClick={handleClickOpen} className="view-details-style">
+      <Button variant="standard" onClick={handleClickOpen} sx={{"&:hover": {backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"}}}>
         View Details
       </Button>
-      <Button variant="standard" onClick={() => setOpenDeletionDialog(true)} className="view-details-style">
+      <Button variant="standard" onClick={() => setOpenDeletionDialog(true)} sx={{"&:hover": {backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"}}}>
         Delete
       </Button>
       </div>
@@ -116,18 +116,46 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
         <Tabs
             value={value} onChange={handleChange}
             aria-label="basic tabs example"
-            indicatorColor="primary"
-            textColor="primary"
+            //indicatorColor="secondary"
+            //textColor="inherit"
+            TabIndicatorProps={{
+              sx:{
+                backgroundColor: "red",
+                maxWidth: "150px",
+                marginLeft: "14px",
+                height: "2px"
+              }
+            }}
         >
             <Tab 
                 icon={<AutoGraphIcon />}
                 label="Altimetry" {...a11yProps(0)}
-                sx={{color: appTheme === "dark" ? "white" : "black", minWidth: "180px"}}
+                sx={{
+                  color: appTheme === "dark" ? "white" : "black",
+                  minWidth: "180px", 
+                  "&.MuiButtonBase-root": {
+                    borderRadius: "10px"
+                  },
+                  "&.Mui-selected": {
+                    color: "black",
+                    backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"
+                  }
+                }}
             />
             <Tab
                 icon={<PhotoLibraryIcon />}
                 label="Images" {...a11yProps(1)}
-                sx={{color: appTheme === "dark" ? "white" : "black", minWidth: "180px"}}
+                sx={{
+                  color: appTheme === "dark" ? "white" : "black",
+                  minWidth: "180px", 
+                  "&.MuiButtonBase-root": {
+                    borderRadius: "10px"
+                  },
+                  "&.Mui-selected": {
+                    color: "black",
+                    backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"
+                  }
+                }}
             />
         </Tabs>
       </Box>

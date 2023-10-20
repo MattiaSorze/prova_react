@@ -62,11 +62,11 @@ export const complHikingsSlice = createSlice({
         })
         .addCase(deleteHikingsData.fulfilled, (state, action) => {
             state.loading = false;
-            toast.success("Data Deleted!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, theme: "dark"});
+            toast.success("Data Deleted!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
         })
         .addCase(deleteHikingsData.rejected, (state, action) => {
             state.loading = false;
-            toast.error("Error in deleting data: " +action.error, {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, theme: "dark"});
+            toast.error("Error in deleting data: " +action.error, {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
         });
     }
 });

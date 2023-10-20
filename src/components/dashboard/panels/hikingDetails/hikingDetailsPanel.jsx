@@ -70,7 +70,7 @@ const HikingDetailsPanel = ({fileData}) => {
   }
 
   const appTheme = useSelector(state => state.complHikings.theme);
-  let appbarColor = appTheme === "dark" ? "rgb(70, 70, 70)" : "rgb(200, 1, 1)";
+  let appbarColor = appTheme === "dark" ? "rgb(70, 70, 70)" : "#0087FF";
   return (
     <div>
       <div>

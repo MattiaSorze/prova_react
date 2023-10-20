@@ -252,7 +252,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
             </Grid>
             <Grid item xs={1} sm={1}/>
             <Grid item xs={2} sm={2} style={{paddingTop: "30px"}}>
-              <Button onClick={() => {resetSearchHikingFilter()}} style={{minWidth: "215px"}}>CLEAR</Button>
+              <Button onClick={() => {resetSearchHikingFilter()}}className="clear-list-button">CLEAR</Button>
             </Grid>
           </Grid>
           
