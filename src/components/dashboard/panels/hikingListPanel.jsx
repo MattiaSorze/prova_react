@@ -112,19 +112,23 @@ export default function HikingListPanel({columns, createDeleteButton}) {
     const hikingsList = hikingData.filter(elem => elem.status === "Completed" || elem.status === "Planned");
     //const [filteredHikingData, setFilteredHikingData] = useState([...hikingsList]);
     const filteredHikingData = useSelector(state => state.complHikings.filteredHikingData);
+    const [selectedHikingIndex, setSelectedHikingIndex] = useState(-1);
+
     useEffect(() => {
       //setFilteredHikingData(hikingsList);
       console.log("ciao");  
     },
     [hikingData]);
     
-    const handleClick = (event, hikingElem) => {
+    const handleClick = (event, hikingElem, hikingIndex) => {
       setAnchorEl(event.currentTarget);
       setCardMenuToOpen(hikingElem);
+      setSelectedHikingIndex(hikingIndex);
     };
   
     const handleClose = () => {
       setAnchorEl(null);
+      setSelectedHikingIndex(-1);
     };
 
     const clickHandler = (row) => {
@@ -259,10 +263,15 @@ export default function HikingListPanel({columns, createDeleteButton}) {
           <div style={{/*display: "flex", flexDirection: "row", justifyContent: "space-around",*/ minWidth: "1100px", maxWidth: "1200px", flexWrap: "wrap"}}>
             <Grid container spacing={8}>
             {filteredHikingData.map((elem, index) =>
-              (<Grid item xs={4}><Card className="hiking-card" variant="outlined">
+              (<Grid item xs={4}>
+                <Card className="hiking-card" variant="outlined"
+                  sx={{
+                    backgroundColor: index === selectedHikingIndex ? (appTheme === "dark" ? "rgb(0, 69, 217)" : "#5de900") : (appTheme === "dark" ? "#676767" : "white")
+                  }}
+                >
                     <CardHeader
                       action={
-                        <IconButton aria-label="settings" onClick={(e) => handleClick(e, elem)}>
+                        <IconButton aria-label="settings" onClick={(e) => handleClick(e, elem, index)}>
                           <MoreVertIcon />
                         </IconButton>
                       }
@@ -277,7 +286,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                         <Typography level="h6" className="hiking-card-title-typography">
                           {formatDate(new Date(elem.hikingDate))}
                         </Typography>
-                        }
+                      }
                     />
                     <Popover
                       id={id}
