@@ -228,10 +228,15 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                   //setFilteredHikingData(hikingsList);
                   dispatch(updateFilteredHikingData(hikingsList));
                 }}
+                sx={{
+                  height: "50px", width: "240px"
+                }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Region" variant="outlined" />
+                  <TextField{...params}
+                    label="Region"
+                    variant="outlined"
+                    />
                 )}
-                sx={{height: "50px", width: "240px"}}
               />
             </Grid>
             <Grid item xs={1} sm={1}/>
@@ -242,15 +247,22 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                 value={searchValue}
                 variant="outlined"
                 onChange={(e) => searchHikingElement(e)}
-                style={{backgroundColor: "white", borderRadius: "5px"}}
+                style={{backgroundColor: "white", borderRadius: "10px"}}
                 InputLabelProps={{
                   style: {color: "blue"}
                 }}
                 disabled={searchField ? false : true}
                 sx={{height: "48px", 
                   "& .MuiOutlinedInput-root": {
-                    height: "48px"
-                  }
+                    height: "48px",
+                    borderRadius: "10px"
+                  },
+                  "& .MuiOutlinedInput-root.Mui-focused": { //quando si clicca dentro l'autocomplete
+                    "& fieldset": {
+                      borderRadius: "10px",
+                      border: "2px solid red"
+                    },
+                  },
                 }}
               ></TextField>
             </Grid>

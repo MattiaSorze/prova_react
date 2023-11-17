@@ -59,8 +59,12 @@ export default function App() {
     },
   });
 
-  let todayHour = new Date().getHours();
-  const [theme, setTheme] = useState(todayHour >= 17 ? "dark" : "light");
+  const handleDarkModeOnHours = () => {
+    let todayHour = new Date().getHours();
+    return todayHour >= 6 && todayHour <= 17 ? "light" : "dark";
+  }
+  
+  const [theme, setTheme] = useState(handleDarkModeOnHours);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));

@@ -10,7 +10,7 @@ const initialState = {
     hikingData: [],
     openCompHikingDetail: false,
     selectedHikingDetail: null,
-    theme: new Date().getHours() >= 17 ? "dark" : "light",
+    theme: new Date().getHours() >= 6 && new Date().getHours() <= 17 ? "light" : "dark",
     searchValue: "",
     searchField: "",
     filteredHikingData: []
