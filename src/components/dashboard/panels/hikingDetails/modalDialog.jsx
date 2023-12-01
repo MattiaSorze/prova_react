@@ -176,7 +176,7 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
         <DialogActions>
             <div style={{paddingRight: "20px", paddingTop: "10px"}}>
                 <Button onClick={handleClose} variant="contained" className="cancel-button">
-                    CANCEL
+                    CLOSE
                 </Button>
             </div>
         </DialogActions>
