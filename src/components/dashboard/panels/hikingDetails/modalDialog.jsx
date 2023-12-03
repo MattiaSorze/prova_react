@@ -137,8 +137,8 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
                     borderRadius: "10px"
                   },
                   "&.Mui-selected": {
-                    color: "black",
-                    backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"
+                    color: appTheme === "dark" ? "white" : "black",
+                    backgroundColor: appTheme === "dark" ? "rgb(70, 70, 70)" : "#5de900"
                   }
                 }}
             />
@@ -152,8 +152,8 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
                     borderRadius: "10px"
                   },
                   "&.Mui-selected": {
-                    color: "black",
-                    backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"
+                    color: appTheme === "dark" ? "white" : "black",
+                    backgroundColor: appTheme === "dark" ? "rgb(70, 70, 70)" : "#5de900"
                   }
                 }}
             />

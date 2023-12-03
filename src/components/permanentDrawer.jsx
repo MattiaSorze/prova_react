@@ -40,7 +40,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Backdrop} from '@mui/material';
-import { PacmanLoader } from 'react-spinners';
+import { PacmanLoader, PropagateLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
 import {Grid} from "@mui/material";
 import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
@@ -312,7 +312,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
       <Box sx={{ display: 'flex', minWidth: "1500px" }}>
         <CssBaseline />
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
-          <PacmanLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
+          <PropagateLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
         </Backdrop>
         <AppBar position="fixed" open={open} className="app-bar-style">
           <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
