@@ -71,6 +71,7 @@
 }
 #light .paper-style-add{
     background-color: white;
+    border-radius: 15px;
 }
 #dark .paper-style-add{
     background-color: rgb(36, 36, 36);

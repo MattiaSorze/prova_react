@@ -289,7 +289,7 @@ export default function AddHiking() {
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Grid item xs={12} className={classes.space}></Grid>
-                    <Paper className="paper-style-add">
+                    <Paper className="paper-style-add" elevation={4}>
                         <Grid container className={classes.container}>
                             <Grid item xs={12} className={classes.title}>
                                 <Typography level="h4" className="typography-style-add">Add Hiking</Typography>
