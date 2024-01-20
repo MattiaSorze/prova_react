@@ -313,13 +313,27 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
   let complHikingsLoading = useSelector(state => state.complHikings.loading);
 
   const zoomIn = () => {
-    document.body.style.zoom = zoomLevel + 0.2;
-    dispatch(setZoomLevel(zoomLevel + 0.2));
+    let zoomL = zoomLevel;
+    if(Number((zoomL+0.2).toFixed(2)) <= 1.6){
+      zoomL = Number((zoomL+0.2).toFixed(1));
+    }
+    else{
+      zoomL = Number((zoomL).toFixed(1));
+    }
+    document.body.style.zoom = zoomL;
+    dispatch(setZoomLevel(zoomL));
   }
 
   const zoomOut = () => {
-    document.body.style.zoom = zoomLevel - 0.2;
-    dispatch(setZoomLevel(zoomLevel - 0.2));
+    let zoomL = zoomLevel;
+    if(Number((zoomL-0.2).toFixed(2)) >= 0.6){
+      zoomL = Number((zoomL-0.2).toFixed(1));
+    }
+    else{
+      zoomL = Number((zoomL).toFixed(1));
+    }
+    document.body.style.zoom = zoomL;
+    dispatch(setZoomLevel(zoomL));
   }
 
   const handleOpenPopover = (event) => {
