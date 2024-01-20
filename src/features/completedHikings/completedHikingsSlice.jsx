@@ -13,7 +13,8 @@ const initialState = {
     theme: new Date().getHours() >= 6 && new Date().getHours() <= 17 ? "light" : "dark",
     searchValue: "",
     searchField: "",
-    filteredHikingData: []
+    filteredHikingData: [],
+    zoomLevel: 1
 };
 
 export const complHikingsSlice = createSlice({
@@ -41,6 +42,9 @@ export const complHikingsSlice = createSlice({
     },
     updateFilteredHikingData: (state, action) => {
         state.filteredHikingData = action.payload;
+    },
+    setZoomLevel: (state, action) => {
+        state.zoomLevel = action.payload;
     }
   },
   extraReducers: 
@@ -71,5 +75,5 @@ export const complHikingsSlice = createSlice({
     }
 });
 
-export const {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchValue, changeSearchField, updateFilteredHikingData} = complHikingsSlice.actions;
+export const {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchValue, changeSearchField, updateFilteredHikingData, setZoomLevel} = complHikingsSlice.actions;
 export default complHikingsSlice.reducer;

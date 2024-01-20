@@ -15,12 +15,12 @@ import { getSettings } from '../redux/services/addHikingsService';
 import { getHikingsData } from '../redux/services/getHikingsService';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { changeSearchField, changeSearchValue, changeTheme, updateFilteredHikingData } from '../features/completedHikings/completedHikingsSlice';
+import { changeSearchField, changeSearchValue, changeTheme, setZoomLevel, updateFilteredHikingData } from '../features/completedHikings/completedHikingsSlice';
 import "../App.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import "./drawerRight.css";
-import { Tooltip } from "@mui/material";
+import { Paper, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPersonHiking } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -39,11 +39,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import {Backdrop} from '@mui/material';
+import {Backdrop, Popover} from '@mui/material';
 import { PacmanLoader, PropagateLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
 import {Grid} from "@mui/material";
 import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
+import { Close, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -218,6 +219,10 @@ const IOSSwitch = styled((props) => (
 export default function PermanentDrawer({toggleTheme, themeParent}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const zoomLevel = useSelector(state => state.complHikings.zoomLevel);
+  const [anchorPopover, setAnchorPopover] = React.useState(null);
+  const openPopover = Boolean(anchorPopover);
+  const id = openPopover ? 'simple-popover' : undefined;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -307,6 +312,25 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
   let addHikingLoading = useSelector(state => state.addHiking.loading);
   let complHikingsLoading = useSelector(state => state.complHikings.loading);
 
+  const zoomIn = () => {
+    document.body.style.zoom = zoomLevel + 0.2;
+    dispatch(setZoomLevel(zoomLevel + 0.2));
+  }
+
+  const zoomOut = () => {
+    document.body.style.zoom = zoomLevel - 0.2;
+    dispatch(setZoomLevel(zoomLevel - 0.2));
+  }
+
+  const handleOpenPopover = (event) => {
+    setAnchorPopover(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setAnchorPopover(null);
+  };
+  
+
   return (
     <div className="App" id={themeParent}>
       <Box sx={{ display: 'flex', minWidth: "1500px" }}>
@@ -327,7 +351,53 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
                   {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
                 </IconButton>
               </Grid>
-              <Grid item xs={9}/>
+              <Grid item xs={8}/>
+              <div>
+                <IconButton aria-label="settings" onClick={(e) => handleOpenPopover(e)} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginTop: "5px", scale: "1.1"}}>
+                  <Settings sx={{color: "white"}}/>
+                </IconButton>
+                <Popover
+                      id={id}
+                      open={openPopover}
+                      anchorEl={anchorPopover}
+                      onClose={handleClosePopover}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                    >
+                      <div style={{display: "flex", flexDirection: "row-reverse", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white", maxHeight: "20px"}}>
+                        <IconButton onClick={() => handleClosePopover()} sx={{scale: "0.7", "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, height: "40px"}}>
+                          <Close style={{color: themeParent === "dark" ? "white" : "black"}}/>
+                        </IconButton>
+                      </div>
+                      <div style={{minWidth: "200px", minHeight: "60px", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
+                        display: "flex", justifyContent: "center"}}>
+                        <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "5px", height: "40px",
+                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
+                          <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
+                        </IconButton>
+                        <div style={{marginTop: "5px", paddingLeft: "12px", paddingRight: "12px", color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)"}}>{zoomLevel*100 + " %"}</div>
+                        <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "5px", height: "40px",
+                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
+                          <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
+                        </IconButton>
+                      </div>
+                </Popover>
+              </div>
+              {/*<div>
+                <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "13px", marginRight: "15px", scale: "1.2",
+                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
+                  <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
+                </IconButton>
+              </div>
+              <div>
+                <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "13px", scale: "1.2",
+                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
+                  <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
+                </IconButton>
+                    </div>*/}
+
               <Grid item xs={1}>
                 <FormControlLabel style={{paddingLeft: "15px"}}
                   control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
