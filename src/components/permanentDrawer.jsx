@@ -115,7 +115,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(4)
   }));
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -347,7 +347,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
 
   return (
     <div className="App" id={themeParent}>
-      <Box sx={{ display: 'flex', minWidth: "1500px" }}>
+      <Box sx={{ display: 'flex'/*, minWidth: "1500px" */}}>
         <CssBaseline />
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
           <PropagateLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
@@ -366,7 +366,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
                 </IconButton>
               </Grid>
               <Grid item xs={8}/>
-              <div>
+              {/*<div>
                 <IconButton aria-label="settings" onClick={(e) => handleOpenPopover(e)} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginTop: "5px", scale: "1.1"}}>
                   <Settings sx={{color: "white"}}/>
                 </IconButton>
@@ -398,7 +398,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
                         </IconButton>
                       </div>
                 </Popover>
-              </div>
+              </div>*/}
               {/*<div>
                 <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "13px", marginRight: "15px", scale: "1.2",
                   "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>

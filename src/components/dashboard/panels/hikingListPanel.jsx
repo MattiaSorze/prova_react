@@ -211,8 +211,8 @@ export default function HikingListPanel({columns, createDeleteButton}) {
             <Typography level="h2" className="title-typography" variant="solid">Hikings List</Typography>
           </Grid>
           <Grid container style={{paddingTop: "10px"}}>
-            <Grid item xs={1} sm={2}></Grid>
-            <Grid item xs={3} sm={2}>
+            {/*<Grid item xs={1} sm={1}></Grid>*/}
+            <Grid item xs={3} sm={3}>
               <FormLabel className="field-style-add">Field</FormLabel>
               <JoyAutocomplete
                 id="controlled-demo"
@@ -239,7 +239,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
                 )}
               />
             </Grid>
-            <Grid item xs={1} sm={1}/>
+            {/*<Grid item xs={1} sm={1}/>*/}
             <Grid item xs={3} sm={2}/*style={{paddingTop: "22px"}}*/>
               <FormLabel className="field-style-add">Value</FormLabel>
               <TextField
@@ -272,7 +272,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
             </Grid>
           </Grid>
           
-          <div style={{/*display: "flex", flexDirection: "row", justifyContent: "space-around",*/ minWidth: "1100px", maxWidth: "1200px", flexWrap: "wrap"}}>
+          <div style={{/*display: "flex", flexDirection: "row", justifyContent: "space-around",*/ minWidth: "1100px", /*maxWidth: "1200px",*/ flexWrap: "wrap"}}>
             <Grid container spacing={8}>
             {filteredHikingData.map((elem, index) =>
               (<Grid item xs={4}>
