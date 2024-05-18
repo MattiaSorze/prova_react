@@ -42,9 +42,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {Backdrop, Popover} from '@mui/material';
 import { PacmanLoader, PropagateLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
-import {Grid} from "@mui/material";
+import {Grid, CircularProgress} from "@mui/material";
 import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
-import { Close, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
+import { Close, Landscape, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -216,6 +216,27 @@ const IOSSwitch = styled((props) => (
     },
 }));
 
+const CustomSpinner = ({ imageUrl, size = 30 }) => {
+  return (
+    <Box position="relative" display="inline-flex">
+      <CircularProgress size={size} />
+      <div style={{position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "60px",
+        height: "60px"}}
+      >
+        {/*<img src={MountainImage} alt="centered" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />*/}
+        <Landscape style={{ backgroundColor: "black", width: '100%', height: '100%', borderRadius: '50%' }}/>
+      </div>
+    </Box>
+  );
+};
+
 export default function PermanentDrawer({toggleTheme, themeParent}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -350,7 +371,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
       <Box sx={{ display: 'flex'/*, minWidth: "1500px" */}}>
         <CssBaseline />
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
-          <PropagateLoader color={themeParent === "dark" ? "#005DFF" : "#01A012"}/>
+          <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
         </Backdrop>
         <AppBar position="fixed" open={open} className="app-bar-style">
           <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
