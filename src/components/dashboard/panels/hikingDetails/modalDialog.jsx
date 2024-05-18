@@ -9,7 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Draggable from "react-draggable";
 import Paper from "@mui/material/Paper";
-import {Tab, Tabs, Typography, Box} from "@mui/material";
+import {Tab, Tabs, Typography, Box, Grid} from "@mui/material";
 import HikingDetailsPanel from './hikingDetailsPanel';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
@@ -17,6 +17,8 @@ import HikingImagesPanel from './hikingImagesPanel';
 import "./modalDialog.css";
 import { deleteHikingsData } from '../../../../redux/services/getHikingsService';
 import DeletionDialog from './deletionDialog';
+import IconButton from '@mui/material/IconButton';
+import Close from "@mui/icons-material/Close";
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -106,9 +108,20 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
             hideBackdrop={false}
         >
         <DialogTitle
-            sx={{textAlign: "center", color: appTheme === "dark" ? "white" : "black"}}
+            sx={{textAlign: "center", color: appTheme === "dark" ? "white" : "black", display: "inline-flex"}}
         >
-            {hikingElem.gpxData?.title}
+          <Grid item xs={3}></Grid>
+            <Grid item xs={6}>
+                <Typography variant="h5">{hikingElem.gpxData?.title}</Typography>
+            </Grid>
+            <Grid item xs={2}/>
+            <Grid item xs={1}>
+                <IconButton sx={{transform: "translate(10px, -5px)", scale: "1.2"}}>
+                    <Close onClick={handleClose} sx={{color: "white", backgroundColor: "red", borderRadius: "15px",
+                        "&:hover": {backgroundColor: "#c00101"}}}/>
+                </IconButton>
+            </Grid>
+            
         </DialogTitle>
         <DialogContent>
         <Box sx={{ width: '100%' }}>
@@ -174,11 +187,11 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
     </Box>
         </DialogContent>
         <DialogActions>
-            <div style={{paddingRight: "20px", paddingTop: "10px"}}>
+            {/*<div style={{paddingRight: "20px", paddingTop: "10px"}}>
                 <Button onClick={handleClose} variant="contained" className="cancel-button">
                     CLOSE
                 </Button>
-            </div>
+            </div>*/}
         </DialogActions>
       </Dialog>
       <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={closePopover}/>

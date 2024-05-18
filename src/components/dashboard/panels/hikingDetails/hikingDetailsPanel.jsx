@@ -137,14 +137,14 @@ const HikingDetailsPanel = ({fileData}) => {
               </div>
 
               <div className="charts-section grid grid-cols-1 gap-4">
-                <AreaChartCard
+                {/*<AreaChartCard
                   Icon={() => null}
                   data={fileData.speedData}
                   dataKey="speed"
                   stroke="#DC1100"
                   fill="#DC1100"
                   yAxisLabel="Speed (m/h)"
-                />
+                />*/}
                 <AreaChartCard
                   Icon={() => null}
                   data={fileData.elevationData}
@@ -153,14 +153,14 @@ const HikingDetailsPanel = ({fileData}) => {
                   fill="#0064DC"
                   yAxisLabel="Elevation (m)"
                 />
-                <AreaChartCard
+                {/*<AreaChartCard
                   Icon={() => null}
                   data={fileData.paceData}
                   dataKey="pace"
                   stroke="#23C004"
                   fill="#23C004"
                   yAxisLabel="Pace (min/km)"
-                />
+                />*/}
               </div>
             </div>
           </>

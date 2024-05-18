@@ -16,7 +16,9 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import HikingImagesPanel from './hikingImagesPanel';
 import "./modalDialog.css";
 import { deleteHikingsData } from '../../../../redux/services/getHikingsService';
-
+import { Close } from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid';
 
 export default function DeletionDialog({open, setOpen, deleteHiking, closePopover}) {
     const dispatch = useDispatch();
@@ -49,23 +51,33 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
             open={open}
             onClose={handleClose}
             PaperComponent={PaperComponent}
-            PaperProps={{ sx: { backgroundColor: dialogPaperColor, height: "170px"}}}
+            PaperProps={{ sx: { backgroundColor: dialogPaperColor, /*minHeight: "200px"*/}}}
             keepMounted
             hideBackdrop={false}
         >
         <DialogTitle
-            sx={{textAlign: "center", color: appTheme === "dark" ? "white" : "black"}}
+            sx={{textAlign: "center", color: appTheme === "dark" ? "white" : "black", display: "inline-flex"}}
         >
-            Delete
+            <Grid item xs={3}></Grid>
+            <Grid item xs={6}>
+                <Typography variant="h5">Delete</Typography>
+            </Grid>
+            <Grid item xs={2}/>
+            <Grid item xs={1}>
+                <IconButton sx={{transform: "translate(10px, -5px)"}}>
+                    <Close onClick={handleClose} sx={{color: "white", backgroundColor: "red", borderRadius: "15px",
+                        "&:hover": {backgroundColor: "#c00101"}}}/>
+                </IconButton>
+            </Grid>
         </DialogTitle>
-        <DialogContent>
-        <Box sx={{ width: '100%', display: "flex", justifyContent: "center" }}>
-            <Typography variant="h7" color={appTheme === "dark" ? "white" : "black"} >
-                Are you sure you want to delete this hiking?
-            </Typography>
-        </Box>
+        <DialogContent sx={{minHeight: "50px"}}>
+            <Box sx={{ width: '100%', display: "flex", justifyContent: "center" }}>
+                <Typography variant="h7" color={appTheme === "dark" ? "white" : "black"} >
+                    Are you sure you want to delete this hiking?
+                </Typography>
+            </Box>
         </DialogContent>
-        <DialogActions sx={{height: "60px"}}>
+        <DialogActions sx={{minHeight: "70px"}}>
             <div style={{marginRight: "5px"}}>
                 <Button onClick={deleteHiking} variant="contained" className="cancel-button">
                     CONFIRM
