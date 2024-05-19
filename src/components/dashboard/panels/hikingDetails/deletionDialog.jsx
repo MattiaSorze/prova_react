@@ -25,7 +25,9 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
 
     const handleClose = () => {
         setOpen(false);
-        closePopover();
+        if(closePopover){
+            closePopover();
+        }
     };
 
     const PaperComponent = props => {

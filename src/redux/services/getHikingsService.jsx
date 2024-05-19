@@ -9,8 +9,6 @@ export const getHikingsData = createAsyncThunk("getHiking/getHikingData",
 
 export const deleteHikingsData = createAsyncThunk("deleteHiking/deleteHikingData",
 async(id, {dispatch}) => {
-    console.log(id);
     const response = await axiosHikingApp.post("data/deleteHikingDataFromId/" +id);
-    dispatch(getHikingsData());
-    return response.data;
+    return {hikingData: response.data};
 })

@@ -59,12 +59,16 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
 
     const handleClose = () => {
         setOpen(false);
-        closePopover();
+        if(closePopover){
+          closePopover();
+        }
     };
 
     const handleDeleteHiking = () => {
       dispatch(deleteHikingsData(hikingElem.id));
-      closePopover();
+      if(closePopover){
+        closePopover();
+      }
       setOpenDeletionDialog(false);
     }
     const PaperComponent = props => {
@@ -93,9 +97,9 @@ export default function ModalDialog({component, openComplHikingDetail, hikingEle
       <Button variant="standard" onClick={handleClickOpen} sx={{"&:hover": {backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"}}}>
         View Details
       </Button>
-      <Button variant="standard" onClick={() => setOpenDeletionDialog(true)} sx={{"&:hover": {backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"}}}>
+      {/*<Button variant="standard" onClick={() => setOpenDeletionDialog(true)} sx={{"&:hover": {backgroundColor: appTheme === "dark" ? "#0087FF" : "#5de900"}}}>
         Delete
-      </Button>
+      </Button>*/}
       </div>
         <Dialog
             fullWidth={fullWidth}

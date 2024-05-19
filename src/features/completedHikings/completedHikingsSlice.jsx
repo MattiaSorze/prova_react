@@ -66,6 +66,8 @@ export const complHikingsSlice = createSlice({
         })
         .addCase(deleteHikingsData.fulfilled, (state, action) => {
             state.loading = false;
+            state.hikingData = action.payload.hikingData;
+            state.filteredHikingData = action.payload.hikingData.filter(elem => elem.status === "Completed" || elem.status === "Planned");
             toast.success("Data Deleted!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
         })
         .addCase(deleteHikingsData.rejected, (state, action) => {

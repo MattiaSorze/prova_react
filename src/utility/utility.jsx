@@ -73,3 +73,28 @@ export const fitToColumn = (header, rows) => {
   );
   return widthArray;
 };
+
+export function toHours(totalMinutes) {
+  const hours = Math.floor(totalMinutes / 60);
+  return hours;
+}
+
+export function toMinutes(totalMinutes) {
+  const minutes = Math.floor(totalMinutes % 60);
+  return minutes;
+}
+
+export function calcDistance(distance) {
+  const approxDistance = Math.floor(distance);
+  return approxDistance;
+}
+
+export function calcAvgSpeed(speed) {
+  const approxSpeed = speed.toFixed(2);
+  return approxSpeed;
+}
+
+export function calcElevation(elevation) {
+  const approxElevation = Math.floor(elevation);
+  return approxElevation;
+}

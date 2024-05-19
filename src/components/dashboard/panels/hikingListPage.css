@@ -1,0 +1,78 @@
+#light .hiking-strip {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-width: 1000px;
+    min-height: 100px;
+    max-width:350px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px !important;
+    border: 2px solid #40a000 !important;
+    display: inline-flex;
+    padding: 20px;
+}
+#light .hiking-strip:hover{
+    background-color: #dcdcdc;
+    cursor: pointer;
+}
+#dark .hiking-strip {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-width: 1000px;
+    min-height: 100px;
+    max-width:350px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px !important;
+    border: 2px solid #00ab09 !important;
+    --background-color: #676767;
+    display: inline-flex;
+    padding: 20px;
+}
+#dark .hiking-strip:hover{
+    background-color: rgb(59, 59, 60);
+    cursor: pointer;
+}
+#light .hiking-strip-typography {
+    color: black;
+    text-align: center;
+}
+#dark .hiking-strip-typography {
+    color: white;
+    text-align: center;
+}
+#light .title-typography {
+    color: black !important;
+    background-color: white !important;
+}
+#dark .title-typography {
+    color: white !important;
+    background-color: rgb(36, 36, 36) !important;
+}
+.hiking-card-popover{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px !important;
+}
+.status-completed-icon {
+    color: #067100;
+    border: 2px solid;
+    border-radius: 20px;
+    border-color: white;
+    background-color: white;
+}
+#light .hiking-strip-title-typography {
+    color: black;
+}
+#dark .hiking-strip-title-typography {
+    color: white;
+}
+.clear-list-button {
+    color:white;
+    background-color:rgb(0, 82, 246) !important;
+    min-width: 215px;
+}
+.clear-list-button:hover {
+    color:white;
+    background-color: rgb(0, 58, 184) !important;
+}
+.clear-list-button:active {
+    color:white;
+    background-color: rgb(0, 47, 148) !important;
+}

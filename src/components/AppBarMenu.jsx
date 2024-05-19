@@ -296,7 +296,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
                 <Typography variant="subtitle1" style={{paddingTop: "4px"}} className="custom-list-item-icon">Home</Typography>
             </div>
           </Box>
-          <Box className="appbar-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+          <Box className="appbar-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter(); loadSettings();}}>
             <div className="appbar-list-item-div">
                 <FontAwesomeIcon icon={faPersonHiking} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
                 <Typography variant="subtitle1" style={{paddingTop: "3px", paddingLeft: "5px"}} className="custom-list-item-icon">Hikings List</Typography>

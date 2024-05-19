@@ -8,13 +8,14 @@ import AddHiking from "./dashboard/addHiking";
 import GpxReader from "../utility/gpxReader";
 import HomePage from "./dashboard/homePage";
 import HikingListPanel from "./dashboard/panels/hikingListPanel";
+import HikingListPage from "./dashboard/panels/hikingListPage";
 
 export default function Navigation() {
   return (
     <Box>
       <Routes>
       <Route path="/" exact element={<HomePage/>} />
-      <Route path="/hikings" exact element={<HikingListPanel/>} />
+      <Route path="/hikings" exact element={<HikingListPage/>} />
       <Route path="/add" exact element={<AddHiking/>} />
       </Routes>
     </Box>
