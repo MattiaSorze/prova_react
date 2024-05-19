@@ -19,7 +19,7 @@ import { changeSearchField, changeSearchValue, changeTheme, setZoomLevel, update
 import "../App.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import "./drawerRight.css";
+import "./AppBarMenu.css";
 import { Paper, Tooltip } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPersonHiking } from "@fortawesome/free-solid-svg-icons";
@@ -231,13 +231,12 @@ const CustomSpinner = ({ imageUrl, size = 30 }) => {
         height: "60px"}}
       >
         {<img src="./icons8-mountain-60.png" alt="centered" style={{ width: '100%', height: '100%', borderRadius: '50%', backgroundColor: "white" }} />}
-        {/*<Landscape style={{ backgroundColor: "black", width: '100%', height: '100%', borderRadius: '50%' }}/>*/}
       </div>
     </Box>
   );
 };
 
-export default function PermanentDrawer({toggleTheme, themeParent}) {
+export default function AppBarMenu({toggleTheme, themeParent}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const zoomLevel = useSelector(state => state.complHikings.zoomLevel);
@@ -288,46 +287,28 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
 }
 
   const list = () => (
-    <Box
-      role="presentation"
+    <div
+      style={{display: "inline-flex", gap: "20px"}}
     >
-        {open ? <Divider className="divider-style"/> : null}
-        <List>
-          {!open ?
-            <Box className="custom-list-item" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
-              <FontAwesomeIcon icon={faHouse} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon" />
-              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Home</Typography>
-            </Box> 
-          :
-          <Box className="custom-list-item-open" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
-            <FontAwesomeIcon icon={faHouse} size="lg" style={{paddingTop: "5px", paddingLeft: "16px"}} className="custom-list-item-icon"/>
-            <Typography variant="subtitle1" style={{paddingTop: "4px"}} className="custom-list-item-icon">Home</Typography>
+          <Box className="appbar-list-item" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+            <div className="appbar-list-item-div">
+                <FontAwesomeIcon icon={faHouse} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
+                <Typography variant="subtitle1" style={{paddingTop: "4px"}} className="custom-list-item-icon">Home</Typography>
+            </div>
           </Box>
-          }
-          {!open ?
-            <Box className="custom-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
-              <FontAwesomeIcon icon={faPersonHiking} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon" />
-              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Hikings</Typography>
-            </Box> 
-          :
-          <Box className="custom-list-item-open" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
-            <FontAwesomeIcon icon={faPersonHiking} size="lg" style={{paddingTop: "5px", paddingLeft: "18px"}} className="custom-list-item-icon"/>
-            <Typography variant="subtitle1" style={{paddingTop: "3px", paddingLeft: "5px"}} className="custom-list-item-icon">Hikings List</Typography>
+          <Box className="appbar-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
+            <div className="appbar-list-item-div">
+                <FontAwesomeIcon icon={faPersonHiking} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
+                <Typography variant="subtitle1" style={{paddingTop: "3px", paddingLeft: "5px"}} className="custom-list-item-icon">Hikings List</Typography>
+            </div>
           </Box>
-          }
-          {!open ?
-            <Box className="custom-list-item" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
-              <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{paddingTop: "5px"}} className="custom-list-item-icon"/>
-              <Typography variant="subtitle2" style={{paddingTop: "8px"}} className="custom-list-item-icon">Add</Typography>
-            </Box> 
-          :
-          <Box className="custom-list-item-open" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
-            <FontAwesomeIcon icon={faCirclePlus} size="lg" style={{paddingTop: "5px", paddingLeft: "18px"}} className="custom-list-item-icon"/>
-            <Typography variant="subtitle1" style={{paddingTop: "3px"}} className="custom-list-item-icon">Add Hiking</Typography>
+          <Box className="appbar-list-item" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
+            <div className="appbar-list-item-div">
+                <FontAwesomeIcon icon={faCirclePlus} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
+                <Typography variant="subtitle1" style={{paddingTop: "3px"}} className="custom-list-item-icon">Add Hiking</Typography>
+            </div>
           </Box>
-          }
-        </List>
-    </Box>
+    </div>
   );
 
   let addHikingLoading = useSelector(state => state.addHiking.loading);
@@ -373,68 +354,21 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
           <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
         </Backdrop>
-        <AppBar position="fixed" open={open} className="app-bar-style">
+        <AppBar position="absolute" open={open} className="app-bar-style">
           <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
             <Grid container>
-              <Grid item xs={2}>
-                <IconButton
-                    aria-label="open drawer"
-                    edge="end"
-                    onClick={handleDrawerOpen}
-                    sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginLeft: "12px", marginTop: "5px", scale: "1.1"}}
-                >
-                  {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
-                </IconButton>
-              </Grid>
-              <Grid item xs={8}/>
-              {/*<div>
-                <IconButton aria-label="settings" onClick={(e) => handleOpenPopover(e)} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginTop: "5px", scale: "1.1"}}>
-                  <Settings sx={{color: "white"}}/>
-                </IconButton>
-                <Popover
-                      id={id}
-                      open={openPopover}
-                      anchorEl={anchorPopover}
-                      onClose={handleClosePopover}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                    >
-                      <div style={{display: "flex", flexDirection: "row-reverse", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white", maxHeight: "20px"}}>
-                        <IconButton onClick={() => handleClosePopover()} sx={{scale: "0.7", "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, height: "40px"}}>
-                          <Close style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                      </div>
-                      <div style={{minWidth: "200px", minHeight: "60px", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
-                        display: "flex", justifyContent: "center"}}>
-                        <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "5px", height: "40px",
-                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                          <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                        <div style={{marginTop: "5px", paddingLeft: "12px", paddingRight: "12px", color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)"}}>{zoomLevel*100 + " %"}</div>
-                        <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "5px", height: "40px",
-                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                          <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                      </div>
-                </Popover>
-              </div>*/}
-              {/*<div>
-                <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "13px", marginRight: "15px", scale: "1.2",
-                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                  <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                </IconButton>
+              <div style={{paddingTop: "5px", display: "inline-flex", paddingRight: "20px"}}>
+                <img src="./icons8-mountain-60.png" alt="centered" style={{ width: "40px", height: "40px", borderRadius: '50%', backgroundColor: "white" }}/>
+                <Typography variant="h6" style={{paddingLeft: "15px", paddingTop: "5px", color: "#40a100"}}>
+                    Hiking App
+                </Typography>
               </div>
-              <div>
-                <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "13px", scale: "1.2",
-                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                  <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                </IconButton>
-                    </div>*/}
+              <Grid item xs={8}>
+                {list()}
+              </Grid>
 
               <Grid item xs={1}>
-                <FormControlLabel style={{paddingLeft: "15px"}}
+                <FormControlLabel style={{paddingLeft: "15px", color: themeParent === "dark" ? "white" : "gray"}}
                   control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
                   label={themeParent === "dark" ? "Dark" : "Light"}
                 />
@@ -442,27 +376,6 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
             </Grid> 
           </Toolbar>
         </AppBar>
-        <Drawer 
-          variant="permanent"
-          open={open}
-          PaperProps={{
-              sx: {
-                backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
-                color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)",
-                borderRight: "1px solid",
-                borderColor: themeParent === "dark" ? "#5B5B5B" : "#E1DFDF",
-                boxShadow: themeParent === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)"
-              }
-            }}
-          >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "lightgray"}}} >
-              <ChevronLeftIcon sx={{color: themeParent === "dark" ? "lightgray" : "gray"}}/>
-            </IconButton>
-          </DrawerHeader>
-          {list()}
-          <Divider className="divider-style" />
-        </Drawer>
         <Main open={open} style={{minHeight: "1000px"}}>
           <Container maxWidth={false} >
             <Navigation />

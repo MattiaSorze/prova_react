@@ -17,6 +17,7 @@ import "react-toggle/style.css";
 import {createContext} from "react";
 import TemporaryDrawer from './components/temporaryDrawer';
 import PermanentDrawer from './components/permanentDrawer';
+import AppBarMenu from './components/AppBarMenu';
 
 export const ThemeContext = createContext(null);
 
@@ -74,7 +75,7 @@ export default function App() {
     <Provider store={store}>
     <BrowserRouter basename="/">
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <PermanentDrawer toggleTheme={toggleTheme} themeParent={theme}/>
+        <AppBarMenu toggleTheme={toggleTheme} themeParent={theme}/>
         </ThemeContext.Provider>
     </BrowserRouter>
     </Provider>
