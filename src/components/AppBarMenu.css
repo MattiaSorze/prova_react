@@ -11,14 +11,67 @@
     background-color: rgb(36, 36, 36);
     margin-left: 150px;
 }
-#light .app-bar-style{
-    background-color: white;
+@media (min-width: 500px) and (max-width: 800px) {
+    #light .app-bar-menu-style{
+        background-color: white;
+        max-width: 800px;
+    }
+    #dark .app-bar-menu-style{
+        background-color: rgb(36, 36, 36);
+        border-bottom: 1px solid;
+        border-bottom-color: #5B5B5B;
+        max-width: 800px;
+    }
 }
-#dark .app-bar-style{
-    background-color: rgb(36, 36, 36);
-    border-bottom: 1px solid;
-    border-bottom-color: #5B5B5B;
+@media (min-width: 800px) and (max-width: 1000px) {
+    #light .app-bar-menu-style{
+        background-color: white;
+        max-width: 1000px;
+    }
+    #dark .app-bar-menu-style{
+        background-color: rgb(36, 36, 36);
+        border-bottom: 1px solid;
+        border-bottom-color: #5B5B5B;
+        max-width: 1000px;
+    }
 }
+@media (min-width: 1000px) and (max-width: 1300px) {
+    #light .app-bar-menu-style{
+        background-color: white;
+        max-width: 1250px;
+    }
+    #dark .app-bar-menu-style{
+        background-color: rgb(36, 36, 36);
+        border-bottom: 1px solid;
+        border-bottom-color: #5B5B5B;
+        max-width: 1250px;
+    }
+}
+@media (min-width: 1300px)  and (max-width: 1700px) {
+    #light .app-bar-menu-style{
+        background-color: white;
+        min-width: 1300px;
+    }
+    #dark .app-bar-menu-style{
+        background-color: rgb(36, 36, 36);
+        border-bottom: 1px solid;
+        border-bottom-color: #5B5B5B;
+        min-width: 1300px;
+    }
+}
+@media (min-width: 1700px) {
+    #light .app-bar-menu-style{
+        background-color: white;
+        min-width: 1500px;
+    }
+    #dark .app-bar-menu-style{
+        background-color: rgb(36, 36, 36);
+        border-bottom: 1px solid;
+        border-bottom-color: #5B5B5B;
+        min-width: 1500px;
+    }
+}
+
 #light .divider-style{
     background-color: lightgrey;
 }

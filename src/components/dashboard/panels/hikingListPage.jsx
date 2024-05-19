@@ -42,8 +42,8 @@ import DeletionDialog from "./hikingDetails/deletionDialog";
 const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
+      flexDirection: "row",
+      //alignItems: "center",
       paddingTop: "30px"
     },
     toolbar: {
@@ -248,7 +248,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
     
     return (
         <div className={classes.root}>
-            <div style={{display: "flex", marginTop: "30px"}}>
+            {/*<div style={{display: "flex", marginTop: "30px"}}>*/}
             <Paper elevation={2}
                 sx={{
                     backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
@@ -257,10 +257,11 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     borderColor: appTheme === "dark" ? "#5B5B5B" : "#E1DFDF",
                     boxShadow: appTheme === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)",
                     padding: "30px",
-                    minWidth: "300px"
+                    minWidth: "400px",
+                    maxWidth: "900px"
                 }}
             >
-                <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
+                <div style={{display: "flex", flexDirection: "column", gap: "20px", padding: "30px"}}>
                     <Avatar alt="Remy Sharp" src="https://d2exd72xrrp1s7.cloudfront.net/www/15/15uit9rdvabg4th9tzp5mbpcw4fjy7r19-u2696130762198-full/1891759a7cb?width=100&height=100&crop=true&q=75&quot"
                         sx={{width: "100px", height: "100px"}}
                     />
@@ -292,15 +293,14 @@ export default function HikingListPage({columns, createDeleteButton}) {
           <Paper elevation={2}
             sx={{
                 backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
-                //color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)",
                 borderRight: "1px solid",
                 borderColor: appTheme === "dark" ? "#5B5B5B" : "#E1DFDF",
                 boxShadow: appTheme === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)",
-                padding: "48px"
+                padding: "48px",
+                paddingLeft: "100px"
             }}
             >
-          <Grid container style={{paddingTop: "10px"}}>
-            <Grid item xs={3} sm={3}>
+              <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap:"10px"}}>
               <FormLabel className="field-style-add">Field</FormLabel>
               <JoyAutocomplete
                 id="controlled-demo"
@@ -314,7 +314,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                   dispatch(updateFilteredHikingData(hikingsList));
                 }}
                 sx={{
-                  height: "50px", width: "240px"
+                  height: "40px", width: "240px"
                 }}
                 renderInput={(params) => (
                   <TextField{...params}
@@ -323,10 +323,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     />
                 )}
               />
-            </Grid>
             {searchField === "Region" ? 
-                <Grid item xs={3} sm={2}>
-                <FormControl>
+                <div style={{alignItems: "center"}}>
                 <FormLabel className="field-style-add">Region</FormLabel>
                 <JoyAutocomplete
                     id="controlled-demo"
@@ -341,13 +339,12 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     <TextField {...params} label="Region" variant="standard" />
                     )}
                     sx={{
-                        height: "50px", width: "240px"
+                        height: "40px", width: "240px"
                     }}
                 />
-                </FormControl>
-                </Grid>
+                </div>
             :
-            <Grid item xs={3} sm={2}>
+            <div style={{alignItems: "center"}}>
             <FormLabel className="field-style-add">Value</FormLabel>
             <TextField
               value={searchValue}
@@ -358,9 +355,9 @@ export default function HikingListPage({columns, createDeleteButton}) {
                 style: {color: "blue"}
               }}
               disabled={searchField ? false : true}
-              sx={{height: "50px", width: "240px",
+              sx={{height: "40px", width: "240px",
                 "& .MuiOutlinedInput-root": {
-                  height: "50px",
+                  height: "40px",
                   borderRadius: "10px"
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": { //quando si clicca dentro l'autocomplete
@@ -371,15 +368,14 @@ export default function HikingListPage({columns, createDeleteButton}) {
                 },
               }}
             ></TextField>
-            </Grid>
+            </div>
             }
-            <Grid item xs={1} sm={1}/>
-            <Grid item xs={2} sm={2} style={{paddingTop: "30px"}}>
+            </div>
+            <div style={{display: "flex", flexDirection: "row-reverse"}}>
               <Button onClick={() => {resetSearchHikingFilter()}}className="clear-list-button">CLEAR</Button>
-            </Grid>
-          </Grid>
+            </div>
           
-          <div style={{ minWidth: "1100px", flexWrap: "wrap"}}>
+          <div style={{ /*minWidth: "1100px",*/ flexWrap: "wrap"}}>
             {filteredHikingData.map((elem, index) =>
               (<Grid item xs={4}>
                 <div className="hiking-strip"
@@ -387,7 +383,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     backgroundColor: index === selectedHikingIndex ? (appTheme === "dark" ? "rgb(0, 69, 217)" : "#5de900") : (appTheme === "dark" ? "#676767" : "white"),
                   }}
                 >
-                    <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="200px" height="150px"/>
+                    <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="150px" height="100px"/>
                     <div style={{minWidth: "500px", paddingLeft: "20px"}}>
                         <BootstrapTooltip title={elem.name} placement="top">
                             <Typography level="h5" className="hiking-strip-title-typography">
@@ -417,18 +413,6 @@ export default function HikingListPage({columns, createDeleteButton}) {
                                 <NorthEastIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
                                 {calcDistance(elem.gpxData.posElevation)} {"m"}
-                                </Typography>
-                            </div>
-                            <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
-                                <VerticalAlignTopIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                {calcElevation(elem.gpxData.maxElevation)} {"m"}
-                                </Typography>
-                            </div>
-                            <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
-                                <VerticalAlignBottomIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                {calcElevation(elem.gpxData.minElevation)} {"m"}
                                 </Typography>
                             </div>
                         </div>
@@ -472,7 +456,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
             )}
           </div>
           </Paper>
-        </div>
+        {/*</div>*/}
         <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={null}/>
     </div>
     );

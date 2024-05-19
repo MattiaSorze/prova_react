@@ -354,7 +354,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
           <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
         </Backdrop>
-        <AppBar position="absolute" open={open} className="app-bar-style">
+        <AppBar position="absolute" open={open} className="app-bar-menu-style">
           <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
             <Grid container>
               <div style={{paddingTop: "5px", display: "inline-flex", paddingRight: "20px"}}>
