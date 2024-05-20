@@ -340,7 +340,7 @@ export default function AddHiking() {
                                             autoComplete: 'new-password', // disable autocomplete and autofill
                                         },
                                     }}
-                                    sx={{ width: 300 }}
+                                    //sx={{ width: 300 }}
                                     options={settings.countryList}
                                     autoHighlight
                                     getOptionLabel={(option) => option.label}

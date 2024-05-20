@@ -115,6 +115,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     flexGrow: 1,
+    overflow: "auto",
     padding: theme.spacing(4)
   }));
 
@@ -349,7 +350,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
 
   return (
     <div className="App" id={themeParent}>
-      <Box sx={{ display: 'flex'/*, minWidth: "1500px" */}}>
+
         <CssBaseline />
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
           <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
@@ -382,7 +383,6 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
           </Container>
         </Main>
         <ToastContainer autoClose={3000}/>
-      </Box>
     </div>
   );
 }

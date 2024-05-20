@@ -256,10 +256,11 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     borderRight: "1px solid",
                     borderColor: appTheme === "dark" ? "#5B5B5B" : "#E1DFDF",
                     boxShadow: appTheme === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)",
-                    padding: "30px",
-                    minWidth: "400px",
+                    //padding: "30px",
+                    //minWidth: "400px",
                     maxWidth: "900px"
                 }}
+                className="user-info-paper"
             >
                 <div style={{display: "flex", flexDirection: "column", gap: "20px", padding: "30px"}}>
                     <Avatar alt="Remy Sharp" src="https://d2exd72xrrp1s7.cloudfront.net/www/15/15uit9rdvabg4th9tzp5mbpcw4fjy7r19-u2696130762198-full/1891759a7cb?width=100&height=100&crop=true&q=75&quot"
@@ -296,9 +297,10 @@ export default function HikingListPage({columns, createDeleteButton}) {
                 borderRight: "1px solid",
                 borderColor: appTheme === "dark" ? "#5B5B5B" : "#E1DFDF",
                 boxShadow: appTheme === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)",
-                padding: "48px",
-                paddingLeft: "100px"
+                //padding: "48px",
+                //paddingLeft: "100px"
             }}
+            className="hiking-list-paper"
             >
               <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap:"10px"}}>
               <FormLabel className="field-style-add">Field</FormLabel>
@@ -384,7 +386,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                   }}
                 >
                     <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="150px" height="100px"/>
-                    <div style={{minWidth: "500px", paddingLeft: "20px"}}>
+                    <div style={{/*minWidth: "500px",*/ paddingLeft: "20px"}}>
                         <BootstrapTooltip title={elem.name} placement="top">
                             <Typography level="h5" className="hiking-strip-title-typography">
                                 {elem.name.length <= 20 ? elem.name : (elem.name.substr(0, 20) + "...")}
