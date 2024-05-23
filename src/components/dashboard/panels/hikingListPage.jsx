@@ -1,12 +1,14 @@
 import { AgGridReact } from "ag-grid-react";
 import { useRef, useCallback, useState, useEffect } from "react";
 import "../../dashboard.css";
-import ModalDialog from "../../../utility/dialog";
+import OldDialog from "../../../utility/dialog";
 import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchField, updateFilteredHikingData} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Card, CardContent, CardMedia, Paper, CardActionArea, CardActions, CardHeader, TextField, Avatar, Accordion, AccordionSummary, AccordionDetails,
-    FormControl } from "@mui/material";
+    FormControl, MenuItem, Popper, Grow, MenuList, ClickAwayListener, 
+    Dialog,
+    InputLabel} from "@mui/material";
 import Tooltip, {tooltipClasses } from "@mui/material/Tooltip";
 import { Grid } from "@material-ui/core";
 import { Button, Typography } from "@mui/joy";
@@ -19,7 +21,7 @@ import React from "react";
 import {styled} from "@mui/material/styles";
 import {IconButton} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { formatter, formatDate } from "../../../utility/utility";
+import { formatter, formatDate, checkLoading } from "../../../utility/utility";
 import {Popover} from "@mui/material";
 import HikingCardMenu from "./hikingCardMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -104,6 +106,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
 
     const appTheme = useSelector(state => state.complHikings.theme);
     const settings = useSelector(state => state.addHiking.settings);
+    let addHikingLoading = useSelector(state => state.addHiking.loading);
+    let complHikingsLoading = useSelector(state => state.complHikings.loading);
     const [openDeletionDialog, setOpenDeletionDialog] = React.useState(false); 
     const [selectedHiking, setSelectedHiking] = React.useState(null);
     const [expanded, setExpanded] = React.useState([]);
@@ -113,8 +117,11 @@ export default function HikingListPage({columns, createDeleteButton}) {
       setExpanded(expandedClone);
     };
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+    const anchorRef = useRef(null);
+    const [anchorRefArray, setAnchorRefArray] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [openArray, setOpenArray] = useState([]);
+    const [hikingDetailToOpen, setHikingDetailToOpen] = useState(null);
     const id = open ? 'simple-popover' : undefined;
 
     const [cardMenuToOpen, setCardMenuToOpen] = useState(null);
@@ -126,23 +133,37 @@ export default function HikingListPage({columns, createDeleteButton}) {
     //const [filteredHikingData, setFilteredHikingData] = useState([...hikingsList]);
     const filteredHikingData = useSelector(state => state.complHikings.filteredHikingData);
     const [selectedHikingIndex, setSelectedHikingIndex] = useState(-1);
-
-    useEffect(() => {
-      //setFilteredHikingData(hikingsList);
-      console.log("ciao");  
-    },
-    [hikingData]);
     
     const handleClick = (event, hikingElem, hikingIndex) => {
-      setAnchorEl(event.currentTarget);
+      //setAnchorEl(event.currentTarget);
       setCardMenuToOpen(hikingElem);
       setSelectedHikingIndex(hikingIndex);
     };
   
-    const handleClose = () => {
+    /*const handleClose = () => {
       setAnchorEl(null);
       setSelectedHikingIndex(-1);
+    };*/
+
+    const handleClose = (event, index) => {
+      //if (anchorRefArray[index] && anchorRefArray[index].current && anchorRefArray[index].current.contains(event.target)) {
+        //return;
+      //}
+      setSelectedHikingIndex(-1);
+      let openArr = [...openArray];
+      openArr[index] = false;
+      setOpenArray(openArr);
+      //setOpen(false);
+      setCardMenuToOpen(null);
+      let anchorElArr = [...anchorRefArray];
+      anchorElArr[index] = null;
+      setAnchorRefArray(anchorElArr);
+      setHikingDetailToOpen(null);
     };
+
+    /*const handleOpenDetailDialog = (elem, index) => {
+      setHikingDetailToOpen(elem);
+    }*/
 
     const clickHandler = (row) => {
         return null;
@@ -245,10 +266,40 @@ export default function HikingListPage({columns, createDeleteButton}) {
         setSelectedHiking(hikingElem);
         setOpenDeletionDialog(true);
     }
+
+    function handleListKeyDown(event) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    }
+
+    const handleToggle = (ev, hikingElem, hikingIndex) => {
+      let anchorEl = ev.currentTarget;
+      let anchorElArr = [...anchorRefArray];
+      anchorElArr[hikingIndex] = anchorEl;
+      setAnchorRefArray(anchorElArr);
+      let openArr = [...openArray];
+      openArr[hikingIndex] = true;
+      setOpenArray(openArr);
+      setOpen(false);
+      setOpen(!open);
+      setSelectedHikingIndex(hikingIndex);
+      setCardMenuToOpen(hikingElem);
+      setHikingDetailToOpen(hikingElem);
+    };
+
+    const handleOpenDetailDialog = (e, elem) => {
+      setHikingDetailToOpen(elem);
+    }
     
     return (
         <div className={classes.root}>
             {/*<div style={{display: "flex", marginTop: "30px"}}>*/}
+            {!checkLoading(addHikingLoading, complHikingsLoading) ? 
+            <div style={{display: "flex"}}>
             <Paper elevation={2}
                 sx={{
                     backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
@@ -270,9 +321,11 @@ export default function HikingListPage({columns, createDeleteButton}) {
                         Mattia
                     </Typography>
                     <div>
-                        <Accordion style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949"}}>
+                        <Accordion style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949",
+                          minWidth: "220px"
+                        }}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
+                                expandIcon={<ExpandMoreIcon sx={{color: appTheme === "dark" ? "white" : "black"}}/>}
                                 aria-controls="panel1-content"
                                 id="panel1-header"
                                 style={{fontWeight: "bold"}}
@@ -280,11 +333,17 @@ export default function HikingListPage({columns, createDeleteButton}) {
                                 Tour
                             </AccordionSummary>
                             <AccordionDetails>
-                                <div style={{padding: "10px"}}>
-                                    Completati: {filteredHikingData.filter(hik => hik.status === "Completed").length}
+                                <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
+                                    <Typography level="h7">Completati</Typography>
+                                    <Typography level="h7" sx={{fontWeight: "bold"}}>
+                                      {filteredHikingData.filter(hik => hik.status === "Completed").length}
+                                    </Typography>
                                 </div>
-                                <div style={{padding: "10px"}}>
-                                    Pianificati: {filteredHikingData.filter(hik => hik.status === "Planned").length}
+                                <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
+                                  <Typography level="h7">Pianificati</Typography>
+                                  <Typography level="h7" sx={{fontWeight: "bold"}}>
+                                    {filteredHikingData.filter(hik => hik.status === "Planned").length}
+                                  </Typography>
                                 </div>
                             </AccordionDetails>
                         </Accordion>
@@ -302,8 +361,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
             }}
             className="hiking-list-paper"
             >
-              <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap:"10px"}}>
-              <FormLabel className="field-style-add">Field</FormLabel>
+              <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap:"10px"}}>
+              <FormLabel className="field-style-add">Filtra per</FormLabel>
               <JoyAutocomplete
                 id="controlled-demo"
                 value={{label: searchField}}
@@ -326,7 +385,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                 )}
               />
             {searchField === "Region" ? 
-                <div style={{alignItems: "center"}}>
+                <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
                 <FormLabel className="field-style-add">Region</FormLabel>
                 <JoyAutocomplete
                     id="controlled-demo"
@@ -346,7 +405,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                 />
                 </div>
             :
-            <div style={{alignItems: "center"}}>
+            <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
             <FormLabel className="field-style-add">Value</FormLabel>
             <TextField
               value={searchValue}
@@ -373,7 +432,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
             </div>
             }
             </div>
-            <div style={{display: "flex", flexDirection: "row-reverse"}}>
+            <div style={{display: "flex", flexDirection: "row-reverse", paddingTop: "20px"}}>
               <Button onClick={() => {resetSearchHikingFilter()}}className="clear-list-button">CLEAR</Button>
             </div>
           
@@ -385,7 +444,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     backgroundColor: index === selectedHikingIndex ? (appTheme === "dark" ? "rgb(0, 69, 217)" : "#5de900") : (appTheme === "dark" ? "#676767" : "white"),
                   }}
                 >
-                    <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="150px" height="100px"/>
+                    <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="150px" height="120px"/>
                     <div style={{/*minWidth: "500px",*/ paddingLeft: "20px"}}>
                         <BootstrapTooltip title={elem.name} placement="top">
                             <Typography level="h5" className="hiking-strip-title-typography">
@@ -395,71 +454,95 @@ export default function HikingListPage({columns, createDeleteButton}) {
                         <div style={{display: "inline-flex", paddingTop: "10px", paddingRight: "10px"}}>
                             <div style={{display: "inline-flex", minWidth: "100px", gap: "10px"}}>
                                 <AccessTimeIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
+                                <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
                                     {toHours(elem.gpxData.duration)} {":"} {toMinutes(elem.gpxData.duration)}
-                                </Typography>
+                                </InputLabel>
                             </div>
                             <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
                                 <MultipleStopIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                    {calcDistance(elem.gpxData.distance)} {"km"}
-                                </Typography>
+                                <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
+                                  {calcDistance(elem.gpxData.distance)} {"km"}
+                                </InputLabel>
                             </div>
                             <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
                                 <ShutterSpeedIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                {calcAvgSpeed(elem.gpxData.averageSpeed)} {"km/h"}
-                                </Typography>
+                                <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
+                                  {calcAvgSpeed(elem.gpxData.averageSpeed)} {"km/h"}
+                                </InputLabel>
                             </div>
                             <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
                                 <NorthEastIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
-                                <Typography level="h7" style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                {calcDistance(elem.gpxData.posElevation)} {"m"}
-                                </Typography>
+                                <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
+                                  {calcDistance(elem.gpxData.posElevation)} {"m"}
+                                </InputLabel>
                             </div>
                         </div>
-                        <Typography level="h7" className="hiking-strip-title-typography" paddingTop="30px">
+                        <InputLabel className="hiking-strip-title-typography" style={{paddingTop: "20px"}}>
                             {formatDate(new Date(elem.hikingDate))}
-                        </Typography>
+                        </InputLabel>
                     </div>
-                    <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
-                        <div>
-                            <IconButton aria-label="settings" onClick={(e) => handleClick(e, elem, index)}>
-                                <MoreVertIcon />
-                            </IconButton>
-                        </div>
-                        <div>
+                    <div style={{display: "flex", flexDirection: "column-reverse"/*, justifyContent: "space-between"*/}}>
+                      {/*<div>
+                      <IconButton
+                        //ref={anchorRefArray[elem]}
+                        id="composition-button"
+                        aria-controls={open ? 'composition-menu' : undefined}
+                        aria-expanded={open ? 'true' : undefined}
+                        aria-haspopup="true"
+                        onClick={(event) => handleToggle(event, elem, index)}
+                      >
+                        <MoreVertIcon/>
+                      </IconButton>
+                      <Popper
+                        open={openArray[index]}
+                        anchorEl={anchorRefArray[index]}
+                        role={undefined}
+                        placement="bottom-start"
+                        transition
+                        disablePortal
+                      >
+                        {({ TransitionProps, placement }) => (
+                          <Grow
+                            {...TransitionProps}
+                            style={{
+                              transformOrigin:
+                                placement === 'bottom-start' ? 'left top' : 'left bottom',
+                            }}
+                          >
+                            <Paper>
+                              <ClickAwayListener onClickAway={(e) => handleClose(e, index)}>
+                                <MenuList
+                                  autoFocusItem={open}
+                                  id="composition-menu"
+                                  aria-labelledby="composition-button"
+                                  onKeyDown={handleListKeyDown}
+                                >
+                                  <MenuItem onClick={(e) => handleClose(e, index)}>Profile</MenuItem>
+                                  <MenuItem onClick={(e) => handleClose(e, index)}>My account</MenuItem>
+                                  <MenuItem onClick={(e) => handleClose(e, index)}>Logout</MenuItem>
+                                </MenuList>
+                              </ClickAwayListener>
+                            </Paper>
+                          </Grow>
+                        )}
+                        
+                      </Popper>
+                      </div>*/}
+                      <div>
                             <BootstrapTooltip placement="top" title={"Elimina"}>
-                                <IconButton onClick={() => handleOpenDeletionDialog(elem)}>
-                                    <Close style={{color: "red"}}/>
-                                </IconButton>
+                                <Button onClick={() => handleOpenDeletionDialog(elem)} sx={{backgroundColor: "red"}}>
+                                    Elimina
+                                </Button>
                             </BootstrapTooltip>
-                        </div>
+                      </div>
                     </div>
-                    <Popover
-                      id={id}
-                      open={open}
-                      anchorEl={anchorEl}
-                      onClose={handleClose}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                      className="hiking-card-popover"
-                      PaperProps={{
-                        style: {
-                          boxShadow: "#b0aeae 2px 2px 4px"
-                        }
-                      }}
-                    >
-                      <HikingCardMenu hikingElem={cardMenuToOpen} closePopover={handleClose}/>
-                    </Popover>
               </div></Grid>)
             )}
           </div>
           </Paper>
-        {/*</div>*/}
         <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={null}/>
-    </div>
+        </div>
+      : null}
+      </div>
     );
 }

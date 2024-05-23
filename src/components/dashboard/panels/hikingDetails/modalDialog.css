@@ -8,13 +8,21 @@
     background-color: #5de900 !important;
 }
 .cancel-button{
-    background-color: rgb(0, 69, 196) !important;
-    color: white !important;
+    --border-color: rgb(0, 69, 196) !important;
+    --color: rgb(0, 69, 196) !important;
     padding-right: "20px";
     padding-top: "10px";
+    font-weight: bold !important;
 }
-.cancel-button:hover {
-    background-color:rgb(0, 51, 145) !important
+.delete-button {
+    border-color: red !important;
+    color: red !important;
+    padding-right: "20px";
+    padding-top: "10px";
+    font-weight: bold !important;
+}
+.delete-button:hover {
+    background-color:rgb(255, 212, 212) !important
 }
 
 @media (max-width: 1600px) {

@@ -34,7 +34,7 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
         //const classes = useStyles();
         return (
             <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
-                <Paper {...props} style={{boxShadow: "#b0aeae 1px 1px 1px 1px"}} />
+                <Paper {...props} style={{boxShadow: "#b0aeae 1px 1px 1px 1px", width: "385px", height: "220px"}} />
             </Draggable>
         );
     };
@@ -62,11 +62,11 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
         >
             <Grid item xs={3}></Grid>
             <Grid item xs={6}>
-                <Typography variant="h5">Delete</Typography>
+                <Typography variant="h5">Elimina Tour</Typography>
             </Grid>
             <Grid item xs={2}/>
             <Grid item xs={1}>
-                <IconButton sx={{transform: "translate(10px, -5px)"}}>
+                <IconButton sx={{transform: "translate(10px, -5px)", padding: "0px"}}>
                     <Close onClick={handleClose} sx={{color: "white", backgroundColor: "red", borderRadius: "15px",
                         "&:hover": {backgroundColor: "#c00101"}}}/>
                 </IconButton>
@@ -75,19 +75,25 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
         <DialogContent sx={{minHeight: "50px"}}>
             <Box sx={{ width: '100%', display: "flex", justifyContent: "center" }}>
                 <Typography variant="h7" color={appTheme === "dark" ? "white" : "black"} >
-                    Are you sure you want to delete this hiking?
+                    Vuoi cancellare davvero questo tour? L'azione non può essere annullata
                 </Typography>
             </Box>
         </DialogContent>
         <DialogActions sx={{minHeight: "70px"}}>
             <div style={{marginRight: "5px"}}>
-                <Button onClick={deleteHiking} variant="contained" className="cancel-button">
-                    CONFIRM
+                <Button onClick={deleteHiking} variant="outlined" className="delete-button">
+                    ELIMINA
                 </Button>                
             </div>
             <div style={{marginRight: "5px"}}>
-                <Button onClick={handleClose} variant="contained" className="cancel-button">
-                    CANCEL
+                <Button onClick={handleClose} variant="outlined" className="cancel-button"
+                    sx={{color: appTheme === "dark" ? "white" : "rgb(0, 69, 196)", borderColor: appTheme === "dark" ? "white" : "rgb(0, 69, 196)",
+                        "&:hover": {
+                            backgroundColor: appTheme === "dark" ? "blue" : "rgb(175, 230, 255)"
+                        }
+                        }
+                    }>
+                    ANNULLA
                 </Button>
             </div>
         </DialogActions>
