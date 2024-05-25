@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+/*import { createSlice } from "@reduxjs/toolkit";
 import { fetchCountryList, fetchRegionList, getSettings, saveHikingData } from "../../redux/services/addHikingsService";
 import { toast } from 'react-toastify';
 import "../../components/dashboard/addHiking.css";
@@ -61,11 +61,13 @@ export const addHikingSlice = createSlice({
                     state.loading = false;
                 })
                 .addCase(saveHikingData.pending, (state, action) => {
-                    state.loading = true;
+                    //state.loading = true;
+                    state.loading = false;
                 })
                 .addCase(saveHikingData.fulfilled, (state, action) => {
                     state.loading = false;
                     state.hikingInfo = initialState.hikingInfo;
+                    state.hikingData = action.payload.hikingData.filter(elem => elem.status === "Completed" || elem.status === "Planned");
                     toast.success("Data Saved!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
                 })
                 .addCase(saveHikingData.rejected, (state, action) => {
@@ -76,4 +78,4 @@ export const addHikingSlice = createSlice({
 });
 
 export const {updateHikingInfo, clearHikingInfo, fileParsingFinished, fileParsingFailed, imageUploadFinished, imageUploadFailed} = addHikingSlice.actions;
-export default addHikingSlice.reducer;
+export default addHikingSlice.reducer;*/

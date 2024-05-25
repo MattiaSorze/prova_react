@@ -43,7 +43,7 @@ import {Backdrop, Popover} from '@mui/material';
 import { PacmanLoader, PropagateLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
 import {Grid, CircularProgress} from "@mui/material";
-import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
+import { clearHikingInfo } from '../features/completedHikings/completedHikingsSlice';
 import { Close, Landscape, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
 
 const drawerWidth = 240;
@@ -267,10 +267,8 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
 
   let windowUrl = window.location.href;
   useEffect(() => { //chiamato a ogni ricarica della pagina
-    if(windowUrl && windowUrl.includes("/add")){
+    if(windowUrl){
       dispatch(getSettings());
-    }
-    else if(windowUrl){
       dispatch(getHikingsData());
     }
   }, []);
@@ -312,7 +310,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
     </div>
   );
 
-  let addHikingLoading = useSelector(state => state.addHiking.loading);
+  let addHikingLoading = useSelector(state => state.complHikings.loading);
   let complHikingsLoading = useSelector(state => state.complHikings.loading);
 
   const zoomIn = () => {

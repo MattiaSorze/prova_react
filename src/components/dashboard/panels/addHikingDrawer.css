@@ -1,0 +1,95 @@
+.button-style-drawer {
+    background-color:#4F850D !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: normal !important;
+    min-width: 100px;
+}
+.button-style-drawer:hover {
+    background-color:#43710b !important
+}
+.button-style-drawer:active {
+    background-color:#325704 !important
+}
+.button-style-drawer:disabled {
+    background-color: rgb(187, 187, 187) !important;
+}
+.upload-button-style-drawer {
+    color:white;
+    --width: 40%;
+    background-color:#4F850D !important;
+    --transition-duration: 0.5s !important;
+    --transition-property: width !important;
+    min-width: 335px;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: normal !important;
+}
+.upload-button-style-drawer:hover {
+    color:white;
+    background-color:#43710b !important;
+    --width: 97%;
+}
+.upload-button-style-drawer:active {
+    color:white;
+    background-color:#325704 !important;
+    --width: 97%;
+}
+.upload-button-style-drawer:disabled {
+    background-color: rgb(187, 187, 187) !important;
+}
+.input-style {
+    display: none;
+}
+#light .typography-style-add{
+    text-align: center;
+    padding:10px;
+    color: black !important;
+}
+#dark .typography-style-add{
+    text-align: center;
+    padding:10px;
+    color: white !important;
+}
+.toast-message{
+    background: rgba(0, 48, 181, 0.751) !important;
+    color: white !important;
+}
+.toast-message-error{
+    background: rgb(66, 66, 66) !important;
+    color: white !important;
+}
+.toast-progress-bar{
+    background-color: #04B504 !important;
+}
+.toast-error-progress-bar{
+    background-color: #F94646 !important;
+}
+.toast-success-icon{
+    color: #04B504;
+}
+.toast-error-icon{
+    color: red;
+}
+#light .paper-style-add{
+    background-color: white;
+    border-radius: 15px;
+}
+#dark .paper-style-add{
+    background-color: rgb(36, 36, 36);
+    border: 1px solid;
+    border-color: #5B5B5B;
+    border-radius: 15px;
+}
+#light .field-style-add{
+    color: rgb(36, 36, 36);
+    padding-left: 5px;
+}
+#dark .field-style-add-drawer{
+    color: white;
+    padding-left: 5px;
+}
+#light .copy-right-add-drawer{
+    color: rgb(36, 36, 36);
+}
+#dark .copy-right-add{
+    color: white;
+}

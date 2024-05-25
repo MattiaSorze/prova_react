@@ -67,16 +67,40 @@
 }
 .clear-list-button {
     color:white;
-    background-color:rgb(0, 82, 246) !important;
+    background-color:#4F850D !important;
     min-width: 215px;
 }
 .clear-list-button:hover {
     color:white;
-    background-color: rgb(0, 58, 184) !important;
+    background-color: #43710b !important;
 }
 .clear-list-button:active {
     color:white;
-    background-color: rgb(0, 47, 148) !important;
+    background-color: #325704 !important;
+}
+#light .open-drawer-icon {
+    color: black;
+}
+#light .open-drawer-icon:hover {
+    background-color: rgb(206, 206, 206);
+}
+#dark .open-drawer-icon {
+    color: white;
+}
+#dark .open-drawer-icon:hover {
+    background-color: rgb(127, 126, 126);
+}
+#light .close-drawer-icon {
+    color: black;
+}
+#light .close-drawer-icon:hover {
+    background-color: rgb(206, 206, 206);
+}
+#dark .close-drawer-icon {
+    color: white;
+}
+#dark .close-drawer-icon:hover {
+    background-color: rgb(127, 126, 126);
 }
 @media (min-width: 2000px){
     .user-info-paper{

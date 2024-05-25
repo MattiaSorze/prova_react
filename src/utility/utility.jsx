@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import * as dataType from "../constants/dataType";
 
 export const updateObject = (oldObject, updatedProperties) => {

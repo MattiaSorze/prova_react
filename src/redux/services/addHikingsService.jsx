@@ -1,5 +1,6 @@
 import axiosHikingApp from "../../axios/axiosHikingApp";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getHikingsData } from "./getHikingsService";
 
 
 export const fetchCountryList = createAsyncThunk("addHiking/getCountryList",

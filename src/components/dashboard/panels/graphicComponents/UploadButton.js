@@ -1,7 +1,7 @@
 // components/UploadButton.js
 import { Button } from "@mui/joy"
 import { useRef } from "react"
-import "../../addHiking.css";
+import "../addHikingDrawer.css";
 import CheckIcon from '@mui/icons-material/Check';
 
 const UploadButton = ({ onFileChange, fileName, label, isFileLoaded, leftIcon, disabled }) => {
@@ -14,7 +14,7 @@ const UploadButton = ({ onFileChange, fileName, label, isFileLoaded, leftIcon, d
   return (
     <div>
       <Button
-        className="upload-button-style"
+        className="upload-button-style-drawer"
         onClick={handleUploadClick}
         //startDecorator={leftIcon}
         //endDecorator={isFileLoaded ? <CheckIcon style={{marginLeft: "15px"}}/> : null}

@@ -18,8 +18,8 @@ import "./hikingListPage.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import React from "react";
-import {styled} from "@mui/material/styles";
-import {IconButton} from "@mui/material";
+import {styled, useTheme} from "@mui/material/styles";
+import {IconButton, Drawer, Divider} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { formatter, formatDate, checkLoading } from "../../../utility/utility";
 import {Popover} from "@mui/material";
@@ -38,8 +38,13 @@ import NorthEastIcon from "@mui/icons-material/NorthEast";
 import VerticalAlignTopIcon from "@mui/icons-material/VerticalAlignTop";
 import { toMinutes, calcDistance, calcElevation, toHours, calcAvgSpeed } from "../../../utility/utility";
 import { deleteHikingsData } from "../../../redux/services/getHikingsService";
-import { Close, Delete } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, Close, Delete, OpenInBrowser } from "@mui/icons-material";
 import DeletionDialog from "./hikingDetails/deletionDialog";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import AddHiking from "../addHiking";
+import AddHikingDrawer from "./addHikingDrawer";
+import UTurnRightIcon from '@mui/icons-material/UTurnRight';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -95,6 +100,15 @@ const useStyles = makeStyles((theme) => ({
   const fadeImages = require.context('../../../../public/Sfondi', true);
   const imageList = fadeImages.keys().map(image => fadeImages(image));
 
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-start',
+  }));
+
 export default function HikingListPage({columns, createDeleteButton}) {
     const gridRef = useRef(); // Optional - for accessing Grid's API
     const dispatch = useDispatch();
@@ -105,12 +119,14 @@ export default function HikingListPage({columns, createDeleteButton}) {
     }, []);
 
     const appTheme = useSelector(state => state.complHikings.theme);
-    const settings = useSelector(state => state.addHiking.settings);
-    let addHikingLoading = useSelector(state => state.addHiking.loading);
+    const settings = useSelector(state => state.complHikings.settings);
+    let addHikingLoading = useSelector(state => state.complHikings.loading);
     let complHikingsLoading = useSelector(state => state.complHikings.loading);
     const [openDeletionDialog, setOpenDeletionDialog] = React.useState(false); 
     const [selectedHiking, setSelectedHiking] = React.useState(null);
     const [expanded, setExpanded] = React.useState([]);
+    const [openDrawer, setOpenDrawer] = React.useState(false);
+    const theme = useTheme();
     const handleExpandClick = (index) => {
       let expandedClone = [...expanded];
       expandedClone[index] = !expandedClone[index];
@@ -129,11 +145,10 @@ export default function HikingListPage({columns, createDeleteButton}) {
     const selectedHikingDetail = useSelector(state => state.complHikings.selectedHikingDetail);
     const hikingData = useSelector(state => state.complHikings.hikingData);
 
-    const hikingsList = hikingData.filter(elem => elem.status === "Completed" || elem.status === "Planned");
-    //const [filteredHikingData, setFilteredHikingData] = useState([...hikingsList]);
+    const hikingsList = hikingData;
     const filteredHikingData = useSelector(state => state.complHikings.filteredHikingData);
     const [selectedHikingIndex, setSelectedHikingIndex] = useState(-1);
-    
+    const totalDistance = useSelector(state => state.complHikings.totalDistance);
     const handleClick = (event, hikingElem, hikingIndex) => {
       //setAnchorEl(event.currentTarget);
       setCardMenuToOpen(hikingElem);
@@ -192,7 +207,6 @@ export default function HikingListPage({columns, createDeleteButton}) {
     //const [searchValue, setSearchValue] = useState(null);
     const searchValue = useSelector(state => state.complHikings.searchValue);
     const searchField = useSelector(state => state.complHikings.searchField);
-    //const [searchField, setSearchField] = useState("");
 
     const searchHikingElement = (e) => {
       let value = e.target.value;
@@ -208,10 +222,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
           filteredData.push(elem);
         }
       });
-      //setFilteredHikingData(filteredData);
       dispatch(updateFilteredHikingData(filteredData));
       dispatch(changeSearchValue(value));
-      //setSearchValue(value);
     }
 
     const searchRegion = (objectValue) => {
@@ -295,10 +307,18 @@ export default function HikingListPage({columns, createDeleteButton}) {
       setHikingDetailToOpen(elem);
     }
     
+    const handleDrawerOpen = () => {
+      setOpenDrawer(true);
+    };
+  
+    const handleDrawerClose = () => {
+      setOpenDrawer(false);
+    };
+
     return (
         <div className={classes.root}>
             {/*<div style={{display: "flex", marginTop: "30px"}}>*/}
-            {!checkLoading(addHikingLoading, complHikingsLoading) ? 
+            {!checkLoading(complHikingsLoading) ? 
             <div style={{display: "flex"}}>
             <Paper elevation={2}
                 sx={{
@@ -321,8 +341,9 @@ export default function HikingListPage({columns, createDeleteButton}) {
                         Mattia
                     </Typography>
                     <div>
-                        <Accordion style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949",
-                          minWidth: "220px"
+                        <Accordion
+                        style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949",
+                          minWidth: "240px"
                         }}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon sx={{color: appTheme === "dark" ? "white" : "black"}}/>}
@@ -330,19 +351,40 @@ export default function HikingListPage({columns, createDeleteButton}) {
                                 id="panel1-header"
                                 style={{fontWeight: "bold"}}
                             >
-                                Tour
+                              <div style={{display: "flex"}}>
+                                {/*<div>
+                                  <IconButton
+                                    style={{scale: "0.8",
+                                      color: appTheme === "dark" ? "white" : "black",
+                                      "&:hover": {
+                                        backgroundColor: appTheme === "dark" ? "rgb(127, 126, 126)" : "rgb(206, 206, 206)"
+                                      }
+                                    }}>
+                                    <UTurnRightIcon/>
+                                  </IconButton>
+                                </div>*/}
+                                <div style={{paddingTop: "10px", paddingLeft: "5px"}}>
+                                  Tour
+                                </div>
+                              </div>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
-                                    <Typography level="h7">Completati</Typography>
+                                    <Typography level="h7" style={{paddingLeft: "10px"}}>Completati</Typography>
                                     <Typography level="h7" sx={{fontWeight: "bold"}}>
                                       {filteredHikingData.filter(hik => hik.status === "Completed").length}
                                     </Typography>
                                 </div>
                                 <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
-                                  <Typography level="h7">Pianificati</Typography>
+                                  <Typography level="h7" style={{paddingLeft: "10px"}}>Pianificati</Typography>
                                   <Typography level="h7" sx={{fontWeight: "bold"}}>
                                     {filteredHikingData.filter(hik => hik.status === "Planned").length}
+                                  </Typography>
+                                </div>
+                                <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
+                                  <Typography level="h7" style={{paddingLeft: "10px"}}>Distanza totale</Typography>
+                                  <Typography level="h7" sx={{fontWeight: "bold"}}>
+                                    {totalDistance}
                                   </Typography>
                                 </div>
                             </AccordionDetails>
@@ -432,13 +474,18 @@ export default function HikingListPage({columns, createDeleteButton}) {
             </div>
             }
             </div>
-            <div style={{display: "flex", flexDirection: "row-reverse", paddingTop: "20px"}}>
-              <Button onClick={() => {resetSearchHikingFilter()}}className="clear-list-button">CLEAR</Button>
+            <div style={{display: "flex", paddingTop: "20px", flexDirection: "row-reverse", gap: "20px"}}>
+              <IconButton
+                onClick={handleDrawerOpen}
+                className="open-drawer-icon"
+              >
+                <ArrowForward/>
+              </IconButton>
+              <Button onClick={() => {resetSearchHikingFilter()}} className="clear-list-button">RESET</Button>
             </div>
-          
           <div style={{ /*minWidth: "1100px",*/ flexWrap: "wrap"}}>
-            {filteredHikingData.map((elem, index) =>
-              (<Grid item xs={4}>
+            {filteredHikingData.map((elem, index) => {
+              return (<Grid item xs={4}>
                 <div className="hiking-strip"
                   sx={{
                     backgroundColor: index === selectedHikingIndex ? (appTheme === "dark" ? "rgb(0, 69, 217)" : "#5de900") : (appTheme === "dark" ? "#676767" : "white"),
@@ -455,7 +502,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                             <div style={{display: "inline-flex", minWidth: "100px", gap: "10px"}}>
                                 <AccessTimeIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
-                                    {toHours(elem.gpxData.duration)} {":"} {toMinutes(elem.gpxData.duration)}
+                                    {toHours(elem.gpxData.duration) + ":" +toMinutes(elem.gpxData.duration)}
                                 </InputLabel>
                             </div>
                             <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
@@ -536,12 +583,56 @@ export default function HikingListPage({columns, createDeleteButton}) {
                             </BootstrapTooltip>
                       </div>
                     </div>
-              </div></Grid>)
+              </div></Grid>)}
             )}
           </div>
           </Paper>
         <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={null}/>
-        </div>
+          <Drawer
+            sx={{
+              width: 500,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: 500
+              },
+            }}
+            PaperProps={{
+              sx: {
+                backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
+                color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)",
+                borderLeft: "1px solid",
+                borderColor: appTheme === "dark" ? "white" : "rgb(36, 36, 36)",
+                marginTop: "62px"
+              }
+            }}
+            variant="temporary"
+            anchor="right"
+            open={openDrawer}
+        >
+          <DrawerHeader>
+            <Grid container>
+              <Grid item xs={2}>
+                <IconButton onClick={handleDrawerClose}
+                  sx={{
+                    color: appTheme === "dark" ? "white" : "black",
+                    "&:hover": {
+                      backgroundColor: appTheme === "dark" ? "rgb(127, 126, 126)" : "rgb(206, 206, 206)"
+                    }
+                  }}>
+                  <Close/>
+                </IconButton>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography level="h4" style={{textAlign: "center", color: appTheme === "dark" ? "white" : "black"}}>
+                  Add Hiking
+                </Typography>
+              </Grid>
+            </Grid>
+          </DrawerHeader>
+          <Divider className="divider-style"/>
+            <AddHikingDrawer/>
+        </Drawer>
+      </div>
       : null}
       </div>
     );
