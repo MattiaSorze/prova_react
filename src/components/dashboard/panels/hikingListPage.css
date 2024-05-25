@@ -106,10 +106,11 @@
     .user-info-paper{
         padding-top: 30px;
         padding-left: 200px;
-        padding-right: 250px;
+        padding-right: 170px;
     }
     .hiking-list-paper{
-        padding-left: 250px;
+        padding-top: 30px;
+        padding-left: 200px;
         padding-right: 200px;
     }
 }
@@ -117,10 +118,10 @@
     .user-info-paper{
         padding-top: 30px;
         padding-left: 100px;
-        padding-right: 150px;
+        padding-right: 120px;
     }
     .hiking-list-paper{
-        padding-left: 200px;
+        padding-left: 120px;
         padding-right: 150px;
         padding-top: 30px;
     }

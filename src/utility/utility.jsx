@@ -8,7 +8,7 @@ export const updateObject = (oldObject, updatedProperties) => {
 };
 
 export const checkLoading = (addHikingLoading, complHikingsLoading) => {
-    return (addHikingLoading || complHikingsLoading);
+    return (addHikingLoading);
 };
 
 export const formatNumber = (value, minimumFractionDigits, maximumFractionDigits, thousandSeparator) => {

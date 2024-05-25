@@ -83,10 +83,6 @@ const useStyles = makeStyles((theme) => ({
     fixedHeight: {
       height: 200,
     },
-    backdrop: {
-      zIndex: theme.zIndex.drawer + 1,
-      color: "#fff",
-    },
     space: {
       paddingTop: "20px",
       //paddingBottom: "20px",
@@ -120,8 +116,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
 
     const appTheme = useSelector(state => state.complHikings.theme);
     const settings = useSelector(state => state.complHikings.settings);
-    let addHikingLoading = useSelector(state => state.complHikings.loading);
-    let complHikingsLoading = useSelector(state => state.complHikings.loading);
+    let loading = useSelector(state => state.complHikings.loading);
     const [openDeletionDialog, setOpenDeletionDialog] = React.useState(false); 
     const [selectedHiking, setSelectedHiking] = React.useState(null);
     const [expanded, setExpanded] = React.useState([]);
@@ -318,7 +313,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
     return (
         <div className={classes.root}>
             {/*<div style={{display: "flex", marginTop: "30px"}}>*/}
-            {!checkLoading(complHikingsLoading) ? 
+            {!checkLoading(loading) ? 
             <div style={{display: "flex"}}>
             <Paper elevation={2}
                 sx={{
@@ -343,10 +338,10 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     <div>
                         <Accordion
                         style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949",
-                          minWidth: "240px"
+                          minWidth: "300px"
                         }}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon sx={{color: appTheme === "dark" ? "white" : "black"}}/>}
+                                expandIcon={<IconButton><ExpandMoreIcon sx={{color: appTheme === "dark" ? "white" : "black"}}/></IconButton>}
                                 aria-controls="panel1-content"
                                 id="panel1-header"
                                 style={{fontWeight: "bold"}}
@@ -363,28 +358,28 @@ export default function HikingListPage({columns, createDeleteButton}) {
                                     <UTurnRightIcon/>
                                   </IconButton>
                                 </div>*/}
-                                <div style={{paddingTop: "10px", paddingLeft: "5px"}}>
+                                <div style={{paddingLeft: "5px"}}>
                                   Tour
                                 </div>
                               </div>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
-                                    <Typography level="h7" style={{paddingLeft: "10px"}}>Completati</Typography>
+                                    <Typography level="h7">Completati</Typography>
                                     <Typography level="h7" sx={{fontWeight: "bold"}}>
                                       {filteredHikingData.filter(hik => hik.status === "Completed").length}
                                     </Typography>
                                 </div>
                                 <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
-                                  <Typography level="h7" style={{paddingLeft: "10px"}}>Pianificati</Typography>
+                                  <Typography level="h7">Pianificati</Typography>
                                   <Typography level="h7" sx={{fontWeight: "bold"}}>
                                     {filteredHikingData.filter(hik => hik.status === "Planned").length}
                                   </Typography>
                                 </div>
                                 <div style={{padding: "10px", display: "flex", justifyContent: "space-between"}}>
-                                  <Typography level="h7" style={{paddingLeft: "10px"}}>Distanza totale</Typography>
+                                  <Typography level="h7">Distanza totale</Typography>
                                   <Typography level="h7" sx={{fontWeight: "bold"}}>
-                                    {totalDistance}
+                                    {totalDistance + " km"}
                                   </Typography>
                                 </div>
                             </AccordionDetails>

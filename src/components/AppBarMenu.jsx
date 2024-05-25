@@ -268,8 +268,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
   let windowUrl = window.location.href;
   useEffect(() => { //chiamato a ogni ricarica della pagina
     if(windowUrl){
-      dispatch(getSettings());
-      dispatch(getHikingsData());
+      loadSettings();
     }
   }, []);
 
@@ -295,23 +294,22 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
                 <Typography variant="subtitle1" style={{paddingTop: "4px"}} className="custom-list-item-icon">Home</Typography>
             </div>
           </Box>
-          <Box className="appbar-list-item" component={Link} to="/hikings" onClick={() => {loadHikingsData(); resetSearchHikingFilter(); loadSettings();}}>
+          <Box className="appbar-list-item" component={Link} to="/hikings" onClick={() => {resetSearchHikingFilter(); loadSettings();}}>
             <div className="appbar-list-item-div">
                 <FontAwesomeIcon icon={faPersonHiking} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
                 <Typography variant="subtitle1" style={{paddingTop: "3px", paddingLeft: "5px"}} className="custom-list-item-icon">Hikings List</Typography>
             </div>
           </Box>
-          <Box className="appbar-list-item" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
+          {/*<Box className="appbar-list-item" component={Link} to="/add" onClick={() => {loadSettings(); resetSearchHikingFilter();}}>
             <div className="appbar-list-item-div">
                 <FontAwesomeIcon icon={faCirclePlus} size="md" style={{paddingTop: "8px"}} className="custom-list-item-icon"/>
                 <Typography variant="subtitle1" style={{paddingTop: "3px"}} className="custom-list-item-icon">Add Hiking</Typography>
             </div>
-          </Box>
+          </Box>*/}
     </div>
   );
 
-  let addHikingLoading = useSelector(state => state.complHikings.loading);
-  let complHikingsLoading = useSelector(state => state.complHikings.loading);
+  let loading = useSelector(state => state.complHikings.loading);
 
   const zoomIn = () => {
     let zoomL = zoomLevel;
@@ -348,11 +346,10 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
 
   return (
     <div className="App" id={themeParent}>
-
-        <CssBaseline />
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
-          <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
-        </Backdrop>
+      <CssBaseline />
+      <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(loading)}>
+        <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
+      </Backdrop>
         <AppBar position="absolute" open={open} className="app-bar-menu-style">
           <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
             <Grid container>
