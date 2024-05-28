@@ -373,7 +373,7 @@ export default function AppBarMenu({toggleTheme, themeParent}) {
           </Toolbar>
         </AppBar>
         <Main open={open} style={{minHeight: "1000px"}}>
-          <Container maxWidth={false} >
+          <Container maxWidth={false} style={{marginTop: "30px"}}>
             <Navigation />
           </Container>
         </Main>

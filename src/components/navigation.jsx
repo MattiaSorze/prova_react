@@ -9,6 +9,7 @@ import GpxReader from "../utility/gpxReader";
 import HomePage from "./dashboard/homePage";
 import HikingListPanel from "./dashboard/panels/hikingListPanel";
 import HikingListPage from "./dashboard/panels/hikingListPage";
+import HikingDetail from "./dashboard/panels/hikingDetail";
 
 export default function Navigation() {
   return (
@@ -17,6 +18,7 @@ export default function Navigation() {
       <Route path="/" exact element={<HomePage/>} />
       <Route path="/hikings" exact element={<HikingListPage/>} />
       <Route path="/add" exact element={<AddHiking/>} />
+      <Route path="/hiking/:id" exact element={<HikingDetail/>}/>
       </Routes>
     </Box>
   );

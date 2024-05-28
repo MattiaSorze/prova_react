@@ -89,7 +89,7 @@ export function calcDistance(distance) {
 }
 
 export function calcAvgSpeed(speed) {
-  const approxSpeed = speed.toFixed(2);
+  const approxSpeed = speed ? speed.toFixed(2) : "";
   return approxSpeed;
 }
 

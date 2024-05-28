@@ -12,7 +12,7 @@
     max-width: 800px;
 }
 #light .hiking-strip:hover{
-    background-color: #dcdcdc;
+    background-color: #eaeaea;
     cursor: pointer;
 }
 #dark .hiking-strip {
@@ -63,6 +63,18 @@
     color: black;
 }
 #dark .hiking-strip-title-typography {
+    color: white;
+}
+#light .hiking-strip-title-typography:hover {
+    text-decoration: underline;
+}
+#dark .hiking-strip-title-typography:hover {
+    text-decoration: underline;
+}
+#light .hiking-strip-date-typography {
+    color: black;
+}
+#dark .hiking-strip-date-typography {
     color: white;
 }
 .clear-list-button {

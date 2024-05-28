@@ -1,0 +1,42 @@
+#light .right-menu {
+    background-color: rgb(220, 220, 220);
+    --padding: 10px;
+    border-radius: 10px;
+}
+#dark .right-menu {
+    background-color: rgb(79, 79, 79);
+    --padding: 10px;
+    border-radius: 10px;
+}
+#light .right-menu-options {
+    color: black;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+}
+#dark .right-menu-options {
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+}
+#light .right-menu-options:hover {
+    background-color: rgb(175, 175, 175);
+    cursor: pointer;
+}
+#dark .right-menu-options:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+#light .elevation-graphic {
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(173, 173, 173);
+    padding: 10px;
+}
+#dark .elevation-graphic {
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(173, 173, 173);
+    padding: 10px;
+}

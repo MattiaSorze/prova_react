@@ -2,7 +2,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useRef, useCallback, useState, useEffect } from "react";
 import "../../dashboard.css";
 import ModalDialog from "../../../utility/dialog";
-import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchField, updateFilteredHikingData} from "../../../features/completedHikings/completedHikingsSlice";
+import {openComplHikingDetailDialog, closeComplHikingDetailDialog, changeTheme, changeSearchField, updateFilteredHikingData, setHikingDetail} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Card, CardContent, CardMedia, Paper, CardActionArea, CardActions, CardHeader, TextField } from "@mui/material";
@@ -136,7 +136,7 @@ export default function HikingListPanel({columns, createDeleteButton}) {
     }
 
     const openComplHikingDetail = (row) => {
-        dispatch(selectHikingDetail(row.data));
+        dispatch(setHikingDetail(row.data));
         //dispatch(openComplHikingDetailDialog());
     }
 

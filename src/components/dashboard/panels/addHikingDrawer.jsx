@@ -422,12 +422,12 @@ export default function AddHikingDrawer() {
                             </Grid>
                             <Grid item xs={2}></Grid>
                             <Grid item xs={12} className={classes.gridSeparator}></Grid>
-                            <Grid item xs={2}/>
-                            <Grid item xs={8} className={classes.uploadButton}>
+                            <Grid item xs={1}/>
+                            <Grid item xs={5} className={classes.uploadButton}>
                               <UploadButton
                                 onFileChange={handleFileChange}
                                 fileName={fileData && fileData.fileName}
-                                label="IMPORTA GPX"
+                                label="Importa GPX"
                                 isFileLoaded={isFileGpxLoaded}
                                 leftIcon={
                                   <IconButton style={{backgroundColor: "white", marginRight: "15px", scale: "0.8"}}>
@@ -437,19 +437,23 @@ export default function AddHikingDrawer() {
                                 disabled={isSaveDisabled || loading}
                               />
                             </Grid>
-                            <Grid item xs={2}/>
-                            <Grid item xs={2}/>
-                            <Grid item xs={2} className={classes.uploadButton}>
+                            <Grid item xs={1}/>
+                            <Grid item xs={4} className={classes.uploadButton}>
                               <UploadButton
                                 onFileChange={handleImageUpload}
                                 fileName={fileData && fileData.fileName}
-                                label="UPLOAD IMAGES"
+                                label="Carica Foto"
                                 isFileLoaded={isFileImagesLoaded}
-                                leftIcon={<PhotoSizeSelectActualIcon style={{marginRight: "15px"}}/>}
+                                leftIcon={
+                                  <IconButton style={{backgroundColor: "white", marginRight: "15px", scale: "0.8"}}>
+                                    <PhotoSizeSelectActualIcon/>
+                                  </IconButton>
+                                }
                                 disabled={isSaveDisabled || loading}
                               />
                             </Grid>
-                            <Grid item xs={12} className={classes.appBarSpacer}></Grid>
+                            <Grid item xs={1} className={classes.gridItem}></Grid>
+                            <Grid item xs={12} className={classes.appBarSpacer}/>
                             <Grid item xs={3} className={classes.gridItem}></Grid>
                             <Grid item xs={3} className={classes.gridItem}>
                               <Button 

@@ -2,7 +2,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useRef, useCallback, useState, useEffect } from "react";
 import "../../dashboard.css";
 import OldDialog from "../../../utility/dialog";
-import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchField, updateFilteredHikingData} from "../../../features/completedHikings/completedHikingsSlice";
+import {openComplHikingDetailDialog, closeComplHikingDetailDialog, changeTheme, changeSearchField, updateFilteredHikingData, setHikingDetail} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Card, CardContent, CardMedia, Paper, CardActionArea, CardActions, CardHeader, TextField, Avatar, Accordion, AccordionSummary, AccordionDetails,
@@ -45,6 +45,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AddHiking from "../addHiking";
 import AddHikingDrawer from "./addHikingDrawer";
 import UTurnRightIcon from '@mui/icons-material/UTurnRight';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -180,12 +181,16 @@ export default function HikingListPage({columns, createDeleteButton}) {
     }
 
     const openComplHikingDetail = (row) => {
-        dispatch(selectHikingDetail(row.data));
+        //dispatch(selectHikingDetail(row.data));
         //dispatch(openComplHikingDetailDialog());
     }
 
     const closeComplHikingDetail = (row) => {
         dispatch(closeComplHikingDetailDialog());
+    }
+
+    const clickHandlerHikingDetail = (e, hiking) => {
+      dispatch(setHikingDetail(hiking));
     }
 
     const ExpandMore = styled((props) => {
@@ -489,8 +494,9 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     <img src={`data:image/jpeg;base64,${elem.imageData ? elem.imageData[0] : ""}`} width="150px" height="120px"/>
                     <div style={{/*minWidth: "500px",*/ paddingLeft: "20px"}}>
                         <BootstrapTooltip title={elem.name} placement="top">
-                            <Typography level="h5" className="hiking-strip-title-typography">
-                                {elem.name.length <= 20 ? elem.name : (elem.name.substr(0, 20) + "...")}
+                            <Typography level="h5" className="hiking-strip-title-typography" onClick={(e) => clickHandlerHikingDetail(e, elem)}
+                              component={Link} to={"/hiking/" + elem.id}>
+                                {elem.name.length <= 40 ? elem.name : (elem.name.substr(0, 20) + "...")}
                             </Typography>
                         </BootstrapTooltip>
                         <div style={{display: "inline-flex", paddingTop: "10px", paddingRight: "10px"}}>
@@ -519,7 +525,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                                 </InputLabel>
                             </div>
                         </div>
-                        <InputLabel className="hiking-strip-title-typography" style={{paddingTop: "20px"}}>
+                        <InputLabel className="hiking-strip-date-typography" style={{paddingTop: "20px"}}>
                             {formatDate(new Date(elem.hikingDate))}
                         </InputLabel>
                     </div>

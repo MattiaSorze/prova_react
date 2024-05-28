@@ -15,7 +15,8 @@ const AreaChartCard = ({
   stroke,
   fill,
   yAxisLabel,
-  Icon
+  Icon,
+  graphicTitle
 }) => {
   const startDate = new Date(data[0].time)/*.getTime()*/;
   data = data.map((item) => ({
@@ -30,7 +31,7 @@ const AreaChartCard = ({
     <div className="p-4 rounded-lg shadow-md bg-gray-100 text-gray-900">
       <div className="flex items-center mb-2">
         <Icon className="icon h-6 w-6 mr-2" />
-        <h3 style={{color: axisColor}}>{yAxisLabel}</h3>
+        <h3 style={{color: axisColor}}>{graphicTitle}</h3>
       </div>
       <ResponsiveContainer width="100%" height={250}>
         <AreaChart

@@ -10,7 +10,15 @@ const initialState = {
     loading: false,
     hikingData: [],
     openCompHikingDetail: false,
-    selectedHikingDetail: null,
+    selectedHikingDetail: {
+        gpxData: {
+            elevationData: [{time: new Date()}],
+            duration: 0,
+            distance: 0,
+            averageSpeed: 0,
+            posElevation: 0
+        }
+    },
     theme: new Date().getHours() >= 6 && new Date().getHours() <= 17 ? "light" : "dark",
     searchValue: "",
     searchField: "",
@@ -41,7 +49,7 @@ export const complHikingsSlice = createSlice({
     closeComplHikingDetailDialog: (state, action) => {
         state.openCompHikingDetail = false;
     },
-    selectHikingDetail: (state, action) => {
+    setHikingDetail: (state, action) => {
         state.selectedHikingDetail = action.payload;
         state.openCompHikingDetail = true;
     },
@@ -153,7 +161,7 @@ export const complHikingsSlice = createSlice({
     }
 });
 
-export const {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail, changeTheme, changeSearchValue, changeSearchField, updateFilteredHikingData, setZoomLevel,
+export const {openComplHikingDetailDialog, closeComplHikingDetailDialog, setHikingDetail, changeTheme, changeSearchValue, changeSearchField, updateFilteredHikingData, setZoomLevel,
     updateHikingInfo, clearHikingInfo, fileParsingFinished, fileParsingFailed, imageUploadFinished, imageUploadFailed
 } = complHikingsSlice.actions;
 export default complHikingsSlice.reducer;

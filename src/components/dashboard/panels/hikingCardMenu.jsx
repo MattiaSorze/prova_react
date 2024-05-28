@@ -3,7 +3,7 @@ import "./hikingCardMenu.css";
 import { Typography } from '@mui/joy';
 import ModalDialog from "../panels/hikingDetails/modalDialog";
 import HikingDetailsPanel from './hikingDetails/hikingDetailsPanel';
-import { selectHikingDetail, closeComplHikingDetailDialog } from '../../../features/completedHikings/completedHikingsSlice';
+import { setHikingDetail, closeComplHikingDetailDialog } from '../../../features/completedHikings/completedHikingsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const HikingCardMenu = ({hikingElem, closePopover}) => {
@@ -24,7 +24,7 @@ const HikingCardMenu = ({hikingElem, closePopover}) => {
   };
 
     const openComplHikingDetail = () => {
-        dispatch(selectHikingDetail(hikingElem));
+        dispatch(setHikingDetail(hikingElem));
     }
 
     const closeComplHikingDetail = () => {

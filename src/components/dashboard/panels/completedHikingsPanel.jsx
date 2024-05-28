@@ -4,7 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 import "../../dashboard.css";
 import ModalDialog from "../../../utility/dialog";
-import {openComplHikingDetailDialog, closeComplHikingDetailDialog, selectHikingDetail} from "../../../features/completedHikings/completedHikingsSlice";
+import {openComplHikingDetailDialog, closeComplHikingDetailDialog, setHikingDetail} from "../../../features/completedHikings/completedHikingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import HikingDetailsPanel from "./hikingDetails/hikingDetailsPanel";
 import { Paper } from "@mui/material";
@@ -25,7 +25,7 @@ export default function CompletedHikingsPanel({completedHikings, columns, create
     }
 
     const openComplHikingDetail = (row) => {
-        dispatch(selectHikingDetail(row.data));
+        dispatch(setHikingDetail(row.data));
         //dispatch(openComplHikingDetailDialog());
     }
 
