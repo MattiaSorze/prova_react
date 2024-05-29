@@ -97,3 +97,13 @@ export function calcElevation(elevation) {
   const approxElevation = Math.floor(elevation);
   return approxElevation;
 }
+
+export const downloadGpxFile = (fileName, gpxData) => {
+  const url = window.URL.createObjectURL(new Blob([gpxData]));
+  const link = document.createElement('a');
+  link.href = url;
+  let filename = fileName + ".gpx";
+  link.setAttribute('download', filename);
+  document.body.appendChild(link);
+  link.click();
+}

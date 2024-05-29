@@ -36,7 +36,8 @@ const initialState = {
         countryList: [],
         statusList: []
     },
-    totalDistance: 0
+    totalDistance: 0,
+    blockSaveButton: false
 };
 
 export const complHikingsSlice = createSlice({
@@ -139,8 +140,8 @@ export const complHikingsSlice = createSlice({
             state.loading = false;
         })
         .addCase(saveHikingData.pending, (state, action) => {
-            //state.loading = true;
             state.loading = false;
+            state.blockSaveButton = true;
         })
         .addCase(saveHikingData.fulfilled, (state, action) => {
             state.loading = false;
@@ -153,10 +154,12 @@ export const complHikingsSlice = createSlice({
             }
             state.totalDistance = totalDistance.toFixed(2);
             toast.success("Data Saved!", {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-progress-bar", icon: <CheckCircleIcon className="toast-success-icon"/>, className: "toast-message"});
+            state.blockSaveButton = false;
         })
         .addCase(saveHikingData.rejected, (state, action) => {
             state.loading = false;
             toast.error("Error in saving data: " +action.error, {position: toast.POSITION.BOTTOM_RIGHT, progressClassName:"toast-error-progress-bar", icon: <ErrorIcon className="toast-error-icon"/>, className: "toast-message"});
+            state.blockSaveButton = false;
         })
     }
 });

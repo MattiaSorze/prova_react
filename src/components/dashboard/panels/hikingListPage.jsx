@@ -319,7 +319,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
         <div className={classes.root}>
             {/*<div style={{display: "flex", marginTop: "30px"}}>*/}
             {!checkLoading(loading) ? 
-            <div style={{display: "flex"}}>
+            <div style={{display: "flex", gap: "50px"}}>
+              <div>
             <Paper elevation={2}
                 sx={{
                     backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
@@ -329,7 +330,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     boxShadow: appTheme === "dark" ? "1px 1px 1px 1px black" : "1px 1px 1px 1px rgb(245, 245, 245)",
                     //padding: "30px",
                     //minWidth: "400px",
-                    maxWidth: "900px"
+                    //maxWidth: "900px"
                 }}
                 className="user-info-paper"
             >
@@ -343,7 +344,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     <div>
                         <Accordion
                         style={{backgroundColor: appTheme === "dark" ? "#494949" : "white", color: appTheme === "dark" ? "white" : "#494949",
-                          minWidth: "300px"
+                          //minWidth: "300px"
                         }}>
                             <AccordionSummary
                                 expandIcon={<IconButton><ExpandMoreIcon sx={{color: appTheme === "dark" ? "white" : "black"}}/></IconButton>}
@@ -392,6 +393,8 @@ export default function HikingListPage({columns, createDeleteButton}) {
                     </div>
                 </div>
             </Paper>
+            </div>
+            <div>
           <Paper elevation={2}
             sx={{
                 backgroundColor: appTheme === "dark" ? "rgb(36, 36, 36)" : "white",
@@ -500,25 +503,25 @@ export default function HikingListPage({columns, createDeleteButton}) {
                             </Typography>
                         </BootstrapTooltip>
                         <div style={{display: "inline-flex", paddingTop: "10px", paddingRight: "10px"}}>
-                            <div style={{display: "inline-flex", minWidth: "100px", gap: "10px"}}>
+                            <div style={{display: "inline-flex", /*minWidth: "100px",*/ gap: "10px"}}>
                                 <AccessTimeIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
                                     {toHours(elem.gpxData.duration) + ":" +toMinutes(elem.gpxData.duration)}
                                 </InputLabel>
                             </div>
-                            <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
+                            <div style={{display: "inline-flex", paddingRight: "10px", /*minWidth: "100px",*/ gap: "10px"}}>
                                 <MultipleStopIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
                                   {calcDistance(elem.gpxData.distance)} {"km"}
                                 </InputLabel>
                             </div>
-                            <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
+                            <div style={{display: "inline-flex", paddingRight: "10px", /*minWidth: "100px",*/ gap: "10px"}}>
                                 <ShutterSpeedIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
                                   {calcAvgSpeed(elem.gpxData.averageSpeed)} {"km/h"}
                                 </InputLabel>
                             </div>
-                            <div style={{display: "inline-flex", paddingRight: "10px", minWidth: "100px", gap: "10px"}}>
+                            <div style={{display: "inline-flex", paddingRight: "10px", /*minWidth: "100px",*/ gap: "10px"}}>
                                 <NorthEastIcon style={{color: appTheme === "dark" ? "white" : "black"}} />
                                 <InputLabel style={{color: appTheme === "dark" ? "white" : "black"}}>
                                   {calcDistance(elem.gpxData.posElevation)} {"m"}
@@ -588,6 +591,7 @@ export default function HikingListPage({columns, createDeleteButton}) {
             )}
           </div>
           </Paper>
+          </div>
         <DeletionDialog open={openDeletionDialog} setOpen={setOpenDeletionDialog} deleteHiking={handleDeleteHiking} closePopover={null}/>
           <Drawer
             sx={{

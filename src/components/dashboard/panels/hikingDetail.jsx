@@ -2,7 +2,7 @@ import { IconButton, Paper, Typography } from "@mui/material";
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HikingIcon from '@mui/icons-material/Hiking';
-import { calcDistance, calcAvgSpeed, calcElevation, toHours, toMinutes } from "../../../utility/utility";
+import { calcDistance, calcAvgSpeed, calcElevation, toHours, toMinutes, downloadGpxFile } from "../../../utility/utility";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import {InputLabel} from "@mui/material";
 import MultipleStopIcon from "@mui/icons-material/MultipleStop";
@@ -142,11 +142,17 @@ export default function HikingDetail() {
                 elevation={2}
             >
                 <div className="right-menu">
-                    <div className="right-menu-options" /*onClick={() => handleOpenDeletionDialog(hikingDetail)}*/>
-                        <IconButton sx={{marginRight: "10px", color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)"}}>
+                    <div className="right-menu-options" onClick={(e) => downloadGpxFile(hikingDetail.name, hikingDetail.gpxData)}>
+                        <IconButton
+                            sx={{marginRight: "10px", color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)"}}
+                        >
                             <Download/>
                         </IconButton>
-                        <div style={{paddingTop: "9px", color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)"}}>Download GPX</div>
+                        <div
+                            style={{paddingTop: "9px", color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)"}}
+                        >
+                            Download GPX
+                        </div>
                     </div>
                     <div className="right-menu-options" onClick={() => handleOpenDeletionDialog(hikingDetail)}>
                         <IconButton sx={{marginRight: "10px", color: appTheme === "dark" ? "white" : "rgb(36, 36, 36)"}}>

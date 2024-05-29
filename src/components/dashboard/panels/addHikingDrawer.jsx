@@ -172,6 +172,7 @@ export default function AddHikingDrawer() {
     const hikingInfo = useSelector(state => state.complHikings.hikingInfo);
     const settings = useSelector(state => state.complHikings.settings);
     const loading = useSelector(state => state.complHikings.loading);
+    const blockSaveButton = useSelector(state => state.complHikings.blockSaveButton);
     const dispatch = useDispatch();
     const [fileData, setFileData] = useState(null);
     const [imageData, setImageData] = useState(null);
@@ -459,7 +460,7 @@ export default function AddHikingDrawer() {
                               <Button 
                                 className="button-style-drawer" 
                                 onClick={() => saveHiking()}
-                                disabled={isSaveDisabled || loading}
+                                disabled={isSaveDisabled || blockSaveButton}
                               >
                                 AGGIUNGI
                               </Button>
