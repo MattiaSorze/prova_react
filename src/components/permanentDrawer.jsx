@@ -43,8 +43,9 @@ import {Backdrop, Popover} from '@mui/material';
 import { PacmanLoader, PropagateLoader } from 'react-spinners';
 import { checkLoading } from '../utility/utility';
 import {Grid, CircularProgress} from "@mui/material";
-import { clearHikingInfo } from '../features/addHiking/addHikingSlice';
-import { Close, Landscape, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
+import { clearHikingInfo } from '../features/completedHikings/completedHikingsSlice';
+import { Close, Hiking, Home, Landscape, Settings, ZoomIn, ZoomOut } from '@mui/icons-material';
+import { useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -65,7 +66,7 @@ const closedMixin = (theme) => ({
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 15px)`,
+    width: `calc(${theme.spacing(8)} + 10px)`,
   },
 });
 
@@ -244,7 +245,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
   const [anchorPopover, setAnchorPopover] = React.useState(null);
   const openPopover = Boolean(anchorPopover);
   const id = openPopover ? 'simple-popover' : undefined;
-
+  const { pathname } = useLocation();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -267,13 +268,14 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
 
   let windowUrl = window.location.href;
   useEffect(() => { //chiamato a ogni ricarica della pagina
-    if(windowUrl && windowUrl.includes("/add")){
-      dispatch(getSettings());
-    }
-    else if(windowUrl){
-      dispatch(getHikingsData());
+    if(windowUrl){
+      loadSettings();
     }
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const changeToggleTheme = () => {
     let themeChanged = themeParent === "dark" ? "light" : "dark";
@@ -291,7 +293,7 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
     <Box
       role="presentation"
     >
-        {open ? <Divider className="divider-style"/> : null}
+      {open ? <Divider className="divider-style"/> : null}
         <List>
           {!open ?
             <Box className="custom-list-item" component={Link} to="/" onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}>
@@ -330,7 +332,62 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
     </Box>
   );
 
-  let addHikingLoading = useSelector(state => state.addHiking.loading);
+  const menuItems = () => {
+    return(
+      <List>
+        <ListItem
+          className="custom-list-item"
+          component={Link}
+          to="/"
+          onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}
+        >
+          <Tooltip title="Home" placement="right" arrow>
+            <ListItemIcon
+              sx={{
+                paddingLeft: "15px",
+                scale: "1.2",
+                "&:hover": {
+                  transform: "translate(5px,0px)",
+                  transition: "ease-in 0.2s"
+                }
+              }}
+            >
+              <Home className="custom-list-item-icon"/>
+            </ListItemIcon>
+          </Tooltip>
+        </ListItem>
+          <ListItem
+            className="custom-list-item"
+            component={Link}
+            to="/hikings"
+            onClick={() => {loadHikingsData(); resetSearchHikingFilter();}}
+          >
+            <Tooltip title="Hikings" placement="right" arrow>
+              <ListItemIcon
+                size="large"
+                sx={{
+                  paddingLeft: "15px",
+                  scale: "1.2",
+                  "&:hover": {
+                    transform: "translate(5px,0px)",
+                    transition: "ease-in 0.2s"
+                  }
+                }}
+              >
+                <Hiking
+                  style={{
+                    paddingTop: "5px",
+                  }}
+                  className="custom-list-item-icon"
+                />
+              </ListItemIcon>
+            </Tooltip>
+          </ListItem>
+        </List>
+    );
+  };
+
+  
   let complHikingsLoading = useSelector(state => state.complHikings.loading);
 
   const zoomIn = () => {
@@ -368,73 +425,41 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
 
   return (
     <div className="App" id={themeParent}>
-      <Box sx={{ display: 'flex'/*, minWidth: "1500px" */}}>
         <CssBaseline />
-        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(addHikingLoading, complHikingsLoading)}>
+        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1000}} open={checkLoading(complHikingsLoading)}>
           <CustomSpinner imageUrl="https://via.placeholder.com/50" size={72} />
         </Backdrop>
         <AppBar position="fixed" open={open} className="app-bar-style">
-          <Toolbar style={{/*display: "flex", flexDirection: "row", justifyContent: "space-between",*/ paddingLeft: "8px"}}>
+          <Toolbar style={{paddingLeft: "8px"}}>
             <Grid container>
-              <Grid item xs={2}>
-                <IconButton
-                    aria-label="open drawer"
-                    edge="end"
-                    onClick={handleDrawerOpen}
-                    sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginLeft: "12px", marginTop: "5px", scale: "1.1"}}
-                >
-                  {!open ? <MenuIcon style={{color: "white"}}/> : <div/>}
-                </IconButton>
+              <Grid item xs={3} sx={{display: "flex", gap: "20px"}}>
+                <img
+                  src="./icons8-mountain-60.png"
+                  alt="centered"
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: '50%',
+                    backgroundColor: "white",
+                    transform: "translate(10px, 5px)"
+                  }}
+                />
+                  <Typography variant="h6"
+                    sx={{
+                      paddingLeft: "15px",
+                      paddingTop: "10px",
+                      color: themeParent === "dark" ? "#40a100" : "white"
+                    }}>
+                    Hiking App
+                  </Typography>
               </Grid>
               <Grid item xs={8}/>
-              {/*<div>
-                <IconButton aria-label="settings" onClick={(e) => handleOpenPopover(e)} sx={{"&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, marginTop: "5px", scale: "1.1"}}>
-                  <Settings sx={{color: "white"}}/>
-                </IconButton>
-                <Popover
-                      id={id}
-                      open={openPopover}
-                      anchorEl={anchorPopover}
-                      onClose={handleClosePopover}
-                      anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                      }}
-                    >
-                      <div style={{display: "flex", flexDirection: "row-reverse", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white", maxHeight: "20px"}}>
-                        <IconButton onClick={() => handleClosePopover()} sx={{scale: "0.7", "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}, height: "40px"}}>
-                          <Close style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                      </div>
-                      <div style={{minWidth: "200px", minHeight: "60px", backgroundColor: themeParent === "dark" ? "rgb(36, 36, 36)" : "white",
-                        display: "flex", justifyContent: "center"}}>
-                        <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "5px", height: "40px",
-                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                          <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                        <div style={{marginTop: "5px", paddingLeft: "12px", paddingRight: "12px", color: themeParent === "dark" ? "white" : "rgb(36, 36, 36)"}}>{zoomLevel*100 + " %"}</div>
-                        <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "5px", height: "40px",
-                          "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                          <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                        </IconButton>
-                      </div>
-                </Popover>
-              </div>*/}
-              {/*<div>
-                <IconButton onClick={()=> zoomIn()} sx={{paddingTop: "13px", marginRight: "15px", scale: "1.2",
-                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                  <ZoomIn style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                </IconButton>
-              </div>
-              <div>
-                <IconButton onClick={()=> zoomOut()} sx={{paddingTop: "13px", scale: "1.2",
-                  "&:hover": {backgroundColor: themeParent === "dark" ? "#4d4f4d" : "#3b9301"}}}>
-                  <ZoomOut style={{color: themeParent === "dark" ? "white" : "black"}}/>
-                </IconButton>
-                    </div>*/}
 
               <Grid item xs={1}>
-                <FormControlLabel style={{paddingLeft: "15px"}}
+                <FormControlLabel
+                  style={{
+                    paddingLeft: "15px"
+                  }}
                   control={<MaterialUISwitch sx={{ m: 1 }} checked={themeParent === "dark"} onChange={changeToggleTheme}  />}
                   label={themeParent === "dark" ? "Dark" : "Light"}
                 />
@@ -460,16 +485,15 @@ export default function PermanentDrawer({toggleTheme, themeParent}) {
               <ChevronLeftIcon sx={{color: themeParent === "dark" ? "lightgray" : "gray"}}/>
             </IconButton>
           </DrawerHeader>
-          {list()}
+          {menuItems()}
           <Divider className="divider-style" />
         </Drawer>
-        <Main open={open} style={{minHeight: "1000px"}}>
-          <Container maxWidth={false} >
+        <Main open={open} /*style={{minHeight: "1000px"}}*/>
+          <Container maxWidth={false} style={{marginTop: "30px", padding: "0px"}}>
             <Navigation />
           </Container>
         </Main>
         <ToastContainer autoClose={3000}/>
-      </Box>
     </div>
   );
 }

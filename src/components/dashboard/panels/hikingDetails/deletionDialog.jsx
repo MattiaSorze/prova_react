@@ -60,6 +60,7 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
         <DialogTitle
             sx={{textAlign: "center", color: appTheme === "dark" ? "white" : "black", display: "inline-flex"}}
         >
+            <Grid container>
             <Grid item xs={3}></Grid>
             <Grid item xs={6}>
                 <Typography variant="h5">Elimina Tour</Typography>
@@ -70,6 +71,7 @@ export default function DeletionDialog({open, setOpen, deleteHiking, closePopove
                     <Close onClick={handleClose} sx={{color: "white", backgroundColor: "red", borderRadius: "15px",
                         "&:hover": {backgroundColor: "#c00101"}}}/>
                 </IconButton>
+            </Grid>
             </Grid>
         </DialogTitle>
         <DialogContent sx={{minHeight: "50px"}}>

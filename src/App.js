@@ -75,7 +75,7 @@ export default function App() {
     <Provider store={store}>
     <BrowserRouter basename="/">
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <AppBarMenu toggleTheme={toggleTheme} themeParent={theme}/>
+        <PermanentDrawer toggleTheme={toggleTheme} themeParent={theme}/>
         </ThemeContext.Provider>
     </BrowserRouter>
     </Provider>
